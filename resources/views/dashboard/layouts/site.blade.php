@@ -1,0 +1,131 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta name="description" content="">
+     <meta name="author" content="Lukasz Holeczek">
+     <meta name="keyword" content="">
+     <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
+     <title>Dashboard</title>
+     <!-- Icons -->
+     <link href="{{ asset('dashboard/css/font-awesome.min.css') }}" rel="stylesheet">
+     <link href="{{ asset('dashboard/css/simple-line-icons.css') }}" rel="stylesheet">
+     <!-- Main styles for this application -->
+     <link href="{{ asset('dashboard/css/style.css') }}" rel="stylesheet">
+
+     <link rel="stylesheet" href="{{ asset('noty/noty.css') }}">
+     <script src="{{ asset('noty/noty.min.js') }}" defer></script>
+ </head>
+ <body class="navbar-fixed sidebar-nav fixed-nav">
+     <header class="navbar">
+         <div class="container-fluid">
+             <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
+             <a class="navbar-brand" href="#"></a>
+             <ul class="nav navbar-nav hidden-md-down">
+                 <li class="nav-item">
+                     <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
+                 </li>
+             </ul>
+             <ul class="nav navbar-nav pull-right hidden-md-down">
+
+                 <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="hidden-md-down">{{ Auth::user()->name }}</span>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right">
+                       <div class="dropdown-header text-xs-center">
+                             <strong>Settings</strong>
+                         </div>
+                         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                        <div class="divider"></div>
+                         <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+                     </div>
+                 </li>
+                 <li class="nav-item">
+                 </li>
+             </ul>
+         </div>
+     </header>
+     <div class="sidebar">
+         <nav class="sidebar-nav">
+             <ul class="nav">
+                 <li class="nav-item">
+                     <a class="nav-link" href="{{ route('dashboard.home') }}"><i class="icon-speedometer"></i> Dashboard</a>
+                 </li>
+                 <li class="nav-title">
+                     Management
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="{{ route('dashboard.users.index') }}"><i class="icon-people"></i> Users</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="{{ route('dashboard.types.index') }}"><i class="icon-folder-alt "></i> Types</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets</a>
+                 </li>
+                 <li class="divider"></li>
+                 <li class="nav-title">
+                     Extras
+                 </li>
+                 <li class="nav-item nav-dropdown">
+                     <a class="nav-link" href="{{ route('dashboard.profile') }}"><i class="icon-user"></i> Profile</a>
+
+                 </li>
+             </ul>
+         </nav>
+     </div>
+     <!-- Main content -->
+     <main class="main">
+         <!-- Breadcrumb -->
+         <ol class="breadcrumb">
+             <li class="breadcrumb-item">Home</li>
+             <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">{{ Auth::user()->roles->first()->display_name }}</a>
+             </li>
+             <li class="breadcrumb-item active">Dashboard</li>
+             <!-- Breadcrumb Menu-->
+             <li class="breadcrumb-menu">
+                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                     <a class="btn btn-secondary" href="{{ route('dashboard.home') }}"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+                 </div>
+             </li>
+         </ol>
+         <div class="container-fluid">
+             <div class="animated fadeIn">
+                 @yield('content')
+             </div>
+         </div>
+         <!-- /.conainer-fluid -->
+     </main>
+
+     <footer class="footer">
+         <span class="text-left">
+             <a href="">Doctor</a> &copy; 2023.
+         </span>
+         <span class="pull-right">
+             Powered by <a href="">UOK</a>
+         </span>
+     </footer>
+     <!-- Bootstrap and necessary plugins -->
+     <script src="{{ asset('dashboard/js/libs/jquery.min.js') }}"></script>
+     <script src="{{ asset('dashboard/js/libs/tether.min.js') }}"></script>
+     <script src="{{ asset('dashboard/js/libs/bootstrap.min.js') }}"></script>
+     <script src="{{ asset('dashboard/js/libs/pace.min.js') }}"></script>
+     <!-- Plugins and scripts required by all views -->
+     <script src="{{ asset('dashboard/js/libs/Chart.min.js') }}"></script>
+     <!-- CoreUI main scripts -->
+
+     <script src="{{ asset('dashboard/js/app.js') }}"></script>
+
+     @extends('dashboard.layouts._noty')
+     @stack('scripts')
+    </body>
+
+ </html>
