@@ -47,7 +47,7 @@
                         <div class="card-block table-responsive">
 
                             @if ($users->count() > 0)
-                                <table class="table table-striped ">
+                                <table id="dataTable" class="table table-striped display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>#</th>

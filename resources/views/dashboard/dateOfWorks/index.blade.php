@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.site')
 @section('title')
-    Manage types
+    Manage dateOfWorks
 @endsection
 @section('content')
 
@@ -18,7 +18,7 @@
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"
                                         aria-hidden="true"></i>
                                     Search</button>
-                                    <a href="{{ route('dashboard.types.create') }}" class="btn btn-outline-primary"><i
+                                    <a href="{{ route('dashboard.dateOfWorks.create') }}" class="btn btn-outline-primary"><i
                                             class="fa fa-plus" aria-hidden="true"></i> Create</a>
 
                             </div>
@@ -30,36 +30,41 @@
                 <div class="col-lg-12" style="margin-top: 15px">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-align-justify"></i> types
+                            <i class="fa fa-align-justify"></i> Date of works
                         </div>
                         <div class="card-block table-responsive">
 
-                            @if ($types->count() > 0)
+                            @if ($dateOfWorks->count() > 0)
                                 <table id="dataTable" class="table table-striped display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Price</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>From</th>
+                                            <th>To</th>
                                             <th>Action</th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($types as $index => $type)
+                                        @foreach ($dateOfWorks as $index => $dateOfWork)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $type->name }}</td>
-                                                <td>{{ $type->description }}</td>
-                                                <td>{{ $type->price }}</td>
+                                                <td>{{ $dateOfWork->start }}</td>
+                                                <td>{{ $dateOfWork->end }}</td>
+                                                <td>{{ $dateOfWork->from }}</td>
+                                                <td>{{ $dateOfWork->to }}</td>
+
                                                 <td>
 
-                                                    <a href="{{ route('dashboard.types.edit', $type->id) }}"
+                                                    <a href="{{ route('dashboard.dateOfWorks.edit', $dateOfWork->id) }}"
                                                         class="btn btn-outline-warning" style="display: inline-block"><i
                                                             class="fa fa-edit"></i> Edit</a>
 
 
-                                                    <form action="{{ route('dashboard.types.destroy', $type->id) }}"
+                                                    <form action="{{ route('dashboard.dateOfWorks.destroy', $dateOfWork->id) }}"
                                                         method="POST" style="display: inline-block">
                                                         @csrf
                                                         @method('delete')
@@ -71,12 +76,14 @@
 
 
                                                 </td>
+
+
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
 
-                                <div class="text-center m-auto">{{ $types->appends(request()->query())->links() }}</div>
+                                <div class="text-center m-auto">{{ $dateOfWorks->appends(request()->query())->links() }}</div>
                             @else
                                 <h3 style="font-weight: 400">Sorry no record found !</h3>
                             @endif

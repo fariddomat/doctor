@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home.index');
-});
+})->name('home');
 Route::get('/clear', function() {
 
     Artisan::call('cache:clear');
@@ -30,4 +31,6 @@ Route::get('/clear', function() {
  });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('appointment', 'HomeController@appointment')->name('appointment');
+Route::post('postAppointment', 'HomeController@postAppointment')->name('postAppointment');

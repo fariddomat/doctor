@@ -17,11 +17,11 @@ class CreateAppointmentsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('type_id');
-            $table->string('user_message')->nullable();
-            $table->string('docotr_report')->nullable();
             $table->time('appointment_time');
             $table->date('appointment_date');
-            $table->integer('price');
+            $table->string('user_message')->nullable();
+            $table->string('docotr_report')->nullable();
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }
