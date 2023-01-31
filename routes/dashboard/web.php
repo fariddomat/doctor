@@ -24,4 +24,11 @@ Route::prefix('dashboard')
         Route::resource('appointments', 'AppointmentController');
         Route::resource('patients', 'PatientController');
 
+        Route::get('images', 'SettingController@images')->name('images');
+        Route::post('updateImages', 'SettingController@updateImages')->name('updateImages');
+        Route::get('about', 'SettingController@about')->name('about');
+        Route::get('social', 'SettingController@social')->name('social');
+        Route::post('settings', 'SettingController@settings')->name('settings');
+
+
     });
