@@ -27,9 +27,22 @@
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('noty/noty.css') }}">
-  <script src="{{ asset('noty/noty.min.js') }}" defer></script>
+  <script src="{{ asset('noty/noty.min.js') }}" ></script>
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+  <link href="{{ asset('dashboard/css/datatables.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('dashboard/css/removeSortingDataTables.css') }}" rel="stylesheet">
+  <link href="{{ asset('dashboard/css/datatablesStyles.css') }}" rel="stylesheet">
+
+  <script src="{{ asset('dashboard/js/libs/jquery.min.js') }}"></script>
+
+  <style>
+
+    td{
+        min-width: 270px;
+    }
+  </style>
 </head>
 
 <body>
@@ -54,35 +67,34 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo me-auto"><a href="{{ route('home') }}">Medilab</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <!-- <a href="{{ route('home') }}" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto " href="{{ route('home') }}">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+
+          @auth
+
+          <li><a class="nav-link scrollto" href="{{ route('profile') }}">Profile</a></li>
+          <li>
+            <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
+        @else
+        <li><a class="nav-link scrollto" href="{{ route('login') }}">Login</a></li>
+
+          @endauth
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -186,8 +198,19 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
-
   @extends('dashboard.layouts._noty')
+  <script src="{{ asset('dashboard/js/datatables.min.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            responsive: true,
+            searching: false,
+            paging: false,
+            sorting: false,
+            info: false,
+        });
+    });
+</script>
   @stack('scripts')
 </body>
 

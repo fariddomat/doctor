@@ -152,7 +152,7 @@
     <!-- CoreUI main scripts -->
 
     <script src="{{ asset('dashboard/js/app.js') }}"></script>
- 
+
     @extends('dashboard.layouts._noty')
     <script src="{{ asset('dashboard/js/datatables.min.js') }}"></script>
     <script>

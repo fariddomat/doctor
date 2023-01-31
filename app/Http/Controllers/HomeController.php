@@ -27,28 +27,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-    public function appointment()
-    {
-        if (auth()) {
-            $types=Type::all();
-            return view('home.appointment', compact('types'));
-        }else{
-            return redirect()->route('login');
-        }
-    }
-
-    public function postAppointment(Request $request)
-    {
-        $request->validate([
-            'user_id'=>'required',
-            'type_id'=>'required',
-            'appointment_time'=>'required',
-            'appointment_date'=>'required',
-        ]);
-
-        Appointment::create($request->all());
-        session()->flash('success', 'Make appointment successfully');
-        return redirect()->route('home');
-    }
 }

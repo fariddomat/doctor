@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.index');
 })->name('home');
-Route::get('/clear', function() {
+Route::get('/clear', function () {
 
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -27,10 +27,14 @@ Route::get('/clear', function() {
     Artisan::call('route:clear');
 
     return "Cleared!";
-
- });
+});
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('appointment', 'HomeController@appointment')->name('appointment');
-Route::post('postAppointment', 'HomeController@postAppointment')->name('postAppointment');
+Route::middleware(['auth'])
+    ->group(function () {
+        Route::get('appointment', 'Home\PatientController@appointment')->name('appointment');
+        Route::post('postAppointment', 'Home\PatientController@postAppointment')->name('postAppointment');
+        Route::get('profile', 'Home\PatientController@profile')->name('profile');
+        Route::post('updateProfile', 'Home\PatientController@updateProfile')->name('updateProfile');
+
+    });

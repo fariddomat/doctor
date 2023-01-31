@@ -38,6 +38,13 @@
                                         <i class="icon-login"></i>
                                         Login</button>
                                 </div>
+
+                            </div><div class="row">
+                                <div class="col-xs-6"> do not have account?
+                                    <a href="{{ route('register') }}" class="btn btn-primary p-x-2">
+                                        <i class="icon-login"></i>
+                                        Register</a>
+                                </div>
                             </div>
                         </form>
                     </div>
