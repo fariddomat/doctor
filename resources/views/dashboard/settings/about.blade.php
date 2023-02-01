@@ -34,6 +34,13 @@
                                     </textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="site_about_doctor" class="text-capitalize">About Doctor</label>
+                                <textarea name="site_about_doctor" class="form-control" id="" cols="30" rows="10">
+                                        {{ setting('site_about_doctor') }}
+                                    </textarea>
+                            </div>
+
                         </div>
                         <div class="col-md-6">
 
@@ -58,6 +65,12 @@
                                 </textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="site_why_choose" class="text-capitalize">Why choose us?</label>
+                                <textarea name="site_why_choose" class="form-control" id="" cols="30" rows="10">
+                                        {{ setting('site_why_choose') }}
+                                    </textarea>
+                            </div>
                         </div>
                     </div>
 

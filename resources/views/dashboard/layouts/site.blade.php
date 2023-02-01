@@ -104,7 +104,24 @@
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link" href="{{ route('dashboard.profile') }}"><i class="icon-user"></i> Profile</a>
-
+                </li>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> Settings</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.about') }}"><i
+                                    class="icon-info"></i>
+                                About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.social') }}"><i class="icon-share"></i>
+                                Social</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.images') }}"><i class="icon-picture"></i>
+                                Images</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

@@ -17,28 +17,29 @@ class SettingController extends Controller
     public function updateImages(Request $request)
     {
 
-        if ($request->cover3) {
-            $image_path = public_path("home/images/3.jpg");
+        if ($request->icon) {
+            $image_path = public_path("home/images/icon.jpg");
             if (File::exists($image_path)) {
                 File::delete($image_path);
             }
-            $request->cover3->move(public_path('/home/images'), '3.jpg');
+            $request->icon->move(public_path('/home/images'), 'icon.jpg');
         }
-        if ($request->cover2) {
-            $image_path = public_path("home/images/2.jpg");
+        if ($request->cover) {
+            $image_path = public_path("home/images/cover.jpg");
             if (File::exists($image_path)) {
                 File::delete($image_path);
             }
-            $request->cover2->move(public_path('/home/images'), '2.jpg');
+            $request->cover->move(public_path('/home/images'), 'cover.jpg');
         }
-        if ($request->cover1) {
-            $image_path = public_path("home/images/1.jpg");
+        if ($request->doctor) {
+            $image_path = public_path("home/images/doctor.jpg");
             // dd($image_path);
             if (File::exists($image_path)) {
                 File::delete($image_path);
             }
-            $request->cover1->move(public_path('/home/images'), '1.jpg');
+            $request->doctor->move(public_path('/home/images'), 'doctor.jpg');
         }
+        session()->flash('success', 'Successfully updated !');
         return redirect()->back();
     }
 

@@ -8,8 +8,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/plus.png') }}" rel="icon">
-    <link href="{{ asset('assets/img/plus.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('home/images/icon.jpg') }}" rel="icon">
+    <link href="{{ asset('home/images/icon.jpg') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -38,8 +38,13 @@
     <script src="{{ asset('dashboard/js/libs/jquery.min.js') }}"></script>
 
     <style>
-        td {
-            min-width: 270px;
+        table{
+            width: 100% !important;
+        }
+        iframe{
+            border:0;
+            width: 100%;
+            height: 350px;
         }
     </style>
 </head>
@@ -49,8 +54,8 @@
     <div id="topbar" class="d-flex align-items-center fixed-top">
         <div class="container d-flex justify-content-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-                <i class="bi bi-phone"></i> +1 5589 55488 55
+                <i class="bi bi-envelope"></i> <a href="mailto:{{ setting('site_email') }}">{{ setting('site_email') }}</a>
+                <i class="bi bi-phone"></i> {{ setting('site_phone') }}
             </div>
             <div class="d-none d-lg-flex social-links align-items-center">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -65,7 +70,7 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="{{ route('home') }}">DrSmile</a></h1>
+            <h1 class="logo me-auto"><a href="{{ route('home') }}">{{ setting('site_title') }}</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="{{ route('home') }}" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -120,13 +125,11 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>DrSmile</h3>
+                        <h3>{{ setting('site_title') }}</h3>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            <strong>Phone:</strong> {{ setting('site_phone') }}
+                            <br>
+                            <strong>Email:</strong> {{ setting('site_email') }}
                         </p>
                     </div>
 
@@ -144,20 +147,17 @@
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">1</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">2</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">3</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">4</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Join Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
+                        <h4>About</h4>
+                        <p>{{ setting('site_about') }}</p>
+
                     </div>
 
                 </div>
@@ -168,7 +168,7 @@
 
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>DrSmile</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>{{ setting('site_title') }}</span></strong>. All Rights Reserved
                 </div>
                 <div class="credits">
                     Designed by UOK

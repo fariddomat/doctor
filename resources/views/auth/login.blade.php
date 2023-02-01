@@ -13,7 +13,7 @@
                             <div class="input-group m-b-1">
                                 <span class="input-group-addon"><i class="icon-user"></i>
                                 </span>
-                                <input type="email" name="email" class="form-control en" placeholder="Email">
+                                <input type="email" name="email" value="{{ old('email') }}" class="form-control en" placeholder="Email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

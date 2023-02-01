@@ -17,21 +17,21 @@
 
 
                         <div class="col-md-4">
-                            <label>Image 1</label>
-                            <input type="file" name="cover1" class="form-control-file">
-                            <img src="{{ asset('home/images/1.jpg') }}" style=" margin-top: 10px; max-width: 250px;"
+                            <label>Icon Image</label>
+                            <input type="file" name="icon" class="form-control-file">
+                            <img src="{{ asset('home/images/icon.jpg') }}" style=" margin-top: 10px; max-width: 250px;"
                                 alt="">
                         </div>
                         <div class="col-md-4">
-                            <label>Image 2</label>
-                            <input type="file" name="cover2" class="form-control-file">
-                            <img src="{{ asset('home/images/2.jpg') }}" style=" margin-top: 10px; max-width: 250px;"
+                            <label>Cover Image</label>
+                            <input type="file" name="cover" class="form-control-file">
+                            <img src="{{ asset('home/images/cover.jpg') }}" style=" margin-top: 10px; max-width: 250px;"
                                 alt="">
                         </div>
                         <div class="col-md-4">
-                            <label>Image 3</label>
-                            <input type="file" name="cover3" class="form-control-file">
-                            <img src="{{ asset('home/images/3.jpg') }}" style=" margin-top: 10px;max-width: 250px;"
+                            <label>Doctor</label>
+                            <input type="file" name="doctor" class="form-control-file">
+                            <img src="{{ asset('home/images/doctor.jpg') }}" style=" margin-top: 10px;max-width: 250px;"
                                 alt="">
                         </div>
 
