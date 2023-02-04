@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\DateOfWork;
 use App\Http\Controllers\Controller;
+use App\SettingLog;
 use Illuminate\Http\Request;
 
 class DateOfWorkController extends Controller
@@ -43,7 +44,9 @@ class DateOfWorkController extends Controller
             'from'=>'required',
             'to'=>'required',
         ]);
-        DateOfWork::create($request->all());
+        $dateOfWork=DateOfWork::create($request->all());
+        SettingLog::log('success', auth()->id(), 'Add New Date Of Work', route('dashboard.dateOfWorks.edit', $dateOfWork->id));
+
         session()->flash('success', 'Created Successfully !');
         return redirect()->route('dashboard.dateOfWorks.index');
     }
@@ -89,6 +92,7 @@ class DateOfWorkController extends Controller
         $dateOfWork=DateOfWork::findOrFail($id);
         $dateOfWork->update($request->all());
 
+        SettingLog::log('warning', auth()->id(), 'Update Date Of Work', route('dashboard.dateOfWorks.edit', $dateOfWork->id));
         session()->flash('success', 'Updated Successfully !');
         return redirect()->route('dashboard.dateOfWorks.index');
     }
@@ -104,6 +108,7 @@ class DateOfWorkController extends Controller
         $dateOfWork=DateOfWork::findOrFail($id);
         $dateOfWork->delete();
 
+        SettingLog::log('danger', auth()->id(), 'Delete Date Of Work Start : '.$dateOfWork->start.' - End : '.$dateOfWork->end,null);
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.dateOfWorks.index');
     }

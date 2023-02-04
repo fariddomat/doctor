@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\SettingLog;
 use App\Type;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,9 @@ class TypeController extends Controller
             'name'=>'required|unique:types,name',
             'description' => 'required'
         ]);
-        Type::create($request->all());
+        $type=Type::create($request->all());
+
+        SettingLog::log('success', auth()->id(), 'Add New Type', route('dashboard.types.edit', $type->id));
         session()->flash('success', 'Created Successfully !');
         return redirect()->route('dashboard.types.index');
     }
@@ -86,6 +89,7 @@ class TypeController extends Controller
         ]);
         $type=Type::findOrFail($id);
         $type->update($request->all());
+        SettingLog::log('warning', auth()->id(), 'Update Type', route('dashboard.types.edit', $type->id));
 
         session()->flash('success', 'Updated Successfully !');
         return redirect()->route('dashboard.types.index');
@@ -101,6 +105,7 @@ class TypeController extends Controller
     {
         $type=Type::findOrFail($id);
         $type->delete();
+        SettingLog::log('danger', auth()->id(), 'Delete Type : '.$type->name, null);
 
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.types.index');

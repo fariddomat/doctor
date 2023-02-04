@@ -29,6 +29,7 @@ Route::prefix('dashboard')
         Route::get('about', 'SettingController@about')->name('about');
         Route::get('social', 'SettingController@social')->name('social');
         Route::post('settings', 'SettingController@settings')->name('settings');
+        Route::get('log', 'SettingController@log')->name('log');
 
 
     });

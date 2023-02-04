@@ -7,7 +7,7 @@
                 <i class="fa fa-align-justify"></i> Social Media
             </div>
             <div class="card-block ">
-                <form action="{{ route('dashboard.about') }}" method="POST">
+                <form action="{{ route('dashboard.settings') }}" method="POST">
                     @csrf
                     @method('post')
                     @include('dashboard.layouts._error')

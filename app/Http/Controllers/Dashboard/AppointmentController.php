@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Appointment;
 use App\DateOfWork;
 use App\Http\Controllers\Controller;
+use App\SettingLog;
 use App\Type;
 use App\User;
 use Illuminate\Http\Request;
@@ -49,7 +50,8 @@ class AppointmentController extends Controller
             'appointment_time' => 'required',
             'appointment_date' => 'required',
         ]);
-        Appointment::create($request->all());
+        $appointment = Appointment::create($request->all());
+        SettingLog::log('success', auth()->id(), 'New Appointment - Patient name : ' . User::find($request->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Created Successfully !');
         return redirect()->route('dashboard.appointments.index');
     }
@@ -90,6 +92,7 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $appointment = Appointment::findOrFail($id);
         if (!$request->docotr_report) {
             $request->validate([
                 'user_id' => 'required',
@@ -97,13 +100,16 @@ class AppointmentController extends Controller
                 'appointment_time' => 'required',
                 'appointment_date' => 'required',
             ]);
-        }else{
+
+            SettingLog::log('warning', auth()->id(), 'Update Appointment - Patient name : ' . User::find($request->user_id)->name, route('dashboard.appointments.show', $appointment->id));
+        } else {
             $request->validate([
                 'docotr_report' => 'required',
                 'price' => 'required',
             ]);
+
+            SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         }
-        $appointment = Appointment::findOrFail($id);
         $appointment->update($request->all());
 
         session()->flash('success', 'Updated Successfully !');
@@ -121,6 +127,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $appointment->delete();
 
+        SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.appointments.index');
     }

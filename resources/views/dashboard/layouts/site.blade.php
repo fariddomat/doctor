@@ -98,6 +98,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.patients.index') }}"><i class="icon-user"></i> Patients</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.log') }}"><i class="fa fa-history"></i> Log</a>
+                </li>
                 <li class="divider"></li>
                 <li class="nav-title">
                     Extras

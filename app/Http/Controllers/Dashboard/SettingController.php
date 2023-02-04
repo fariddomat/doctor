@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\SettingLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -39,6 +40,8 @@ class SettingController extends Controller
             }
             $request->doctor->move(public_path('/home/images'), 'doctor.jpg');
         }
+
+        SettingLog::log('success', auth()->id(), 'Update Images', null);
         session()->flash('success', 'Successfully updated !');
         return redirect()->back();
     }
@@ -56,7 +59,14 @@ class SettingController extends Controller
     public function settings(Request $request)
     {
         setting($request->all())->save();
+        SettingLog::log('success', auth()->id(), 'Update Settings', null);
         session()->flash('success', 'Successfully updated !');
         return redirect()->back();
+    }
+
+    public function log()
+    {
+        $logs=SettingLog::orderBy('created_at','asc')->paginate(10);
+        return view('dashboard.settings.log',compact('logs'));
     }
 }

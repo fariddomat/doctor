@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\SettingLog;
 use App\User;
 use Session;
 use Illuminate\Http\Request;
@@ -21,14 +22,14 @@ class UserController extends Controller
     public function index()
     {
         // dd(true);
-        $roles=Role::whereRoleNot(['doctor'])->get();
+        $roles = Role::whereRoleNot(['doctor'])->get();
 
-        $users=User::whereRoleNot(['doctor'])
+        $users = User::whereRoleNot(['doctor'])
             ->whenSearch(request()->search)
             ->whenRole(request()->role_id)
             ->with('roles')
             ->paginate(5);
-        return view('dashboard.users.index',compact('users','roles'));
+        return view('dashboard.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -38,9 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles=Role::whereRoleNot(['doctor'])->get();
-        return view('dashboard.users.create',compact('roles'));
-
+        $roles = Role::whereRoleNot(['doctor'])->get();
+        return view('dashboard.users.create', compact('roles'));
     }
 
     /**
@@ -52,15 +52,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|confirmed',
-            'role_id'=>'required|numeric',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed',
+            'role_id' => 'required|numeric',
         ]);
-        $request->merge(['password'=>bcrypt($request->password)]);
-        $user=User::create($request->all());
+        $request->merge(['password' => bcrypt($request->password)]);
+        $user = User::create($request->all());
         $user->attachRoles([$request->role_id]);
-        Session::flash('success','Successfully Created !');
+        SettingLog::log('success', auth()->id(), 'Add New User : ' . $user->name, route('dashboard.users.edit', $user->id));
+
+        session()->flash('success', 'Successfully Created !');
         return redirect()->route('dashboard.users.index');
     }
 
@@ -83,11 +85,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles=Role::whereRoleNot(['doctor'])->get();
+        $roles = Role::whereRoleNot(['doctor'])->get();
 
-        $user=User::find($id);
-        return view('dashboard.users.edit',compact('roles','user'));
-
+        $user = User::findOrFail($id);
+        return view('dashboard.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -100,15 +101,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email,' . $id,
-            'role_id'=>'required|numeric',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role_id' => 'required|numeric',
         ]);
-        $user=User::find($id);
+        $user = User::findOrFail($id);
 
         $user->update($request->all());
         $user->syncRoles([$request->role_id]);
-        Session::flash('success','Successfully updated !');
+
+        SettingLog::log('warning', auth()->id(), 'Update User : ' . $user->name, route('dashboard.users.edit', $user->id));
+        session()->flash('success', 'Successfully updated !');
         return redirect()->route('dashboard.users.index');
     }
 
@@ -120,23 +123,25 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
-        Session::flash('success','Successfully deleted !');
+        SettingLog::log('danger', auth()->id(), 'Delete User : ' . $user->name, null);
+        session()->flash('success', 'Successfully deleted !');
         return redirect()->route('dashboard.users.index');
     }
 
     public function ban($id)
     {
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         if ($user) {
             $user->update([
-                'status'=>'ban'
+                'status' => 'ban'
             ]);
 
-            Session::flash('success','Successfully Ban !');
+            SettingLog::log('info', auth()->id(), 'Banned User : ' . $user->name, route('dashboard.users.edit', $user->id));
+            session()->flash('success', 'Successfully Ban !');
             return redirect()->route('dashboard.users.index');
         } else
             return response()->json(['message' => 'error'], 404);
@@ -144,13 +149,14 @@ class UserController extends Controller
 
     public function unban($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         if ($user) {
             $user->update([
-                'status'=>'active'
+                'status' => 'active'
             ]);
 
-        Session::flash('success','Successfully unBan !');
+            SettingLog::log('info', auth()->id(), 'Un Bannde User : ' . $user->name, route('dashboard.users.edit', $user->id));
+            session()->flash('success', 'Successfully unBan !');
             return redirect()->route('dashboard.users.index');
         } else
             return response()->json(['message' => 'error'], 404);
