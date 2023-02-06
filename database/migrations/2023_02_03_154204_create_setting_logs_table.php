@@ -14,12 +14,15 @@ class CreateSettingLogsTable extends Migration
     public function up()
     {
         Schema::create('setting_logs', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
             $table->string('type');
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('log');
             $table->string('url')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

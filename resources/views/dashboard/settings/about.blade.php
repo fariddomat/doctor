@@ -40,7 +40,11 @@
                                         {{ setting('site_about_doctor') }}
                                     </textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label for="site_awards_count" class="text-capitalize">Awards Count</label>
+                                <input type="number" class="form-control" name="site_awards_count" id="site_awards_count"
+                                    value="{{ setting('site_awards_count') }}" aria-describedby="helpId" placeholder="">
+                            </div>
                         </div>
                         <div class="col-md-6">
 

@@ -34,5 +34,48 @@
 
             n.show();
         }); //end of delete
+
+        // ban
+        $("tbody").on("click", ".ban", function(e) {
+            var that = $(this);
+            e.preventDefault();
+            var n = new Noty({
+                text: "Confirm Ban",
+                type: "error",
+                killer: true,
+                buttons: [
+                    Noty.button("Yes", "btn btn-success me-2", function() {
+                        that.closest("form").submit();
+                    }),
+
+                    Noty.button("No", "btn btn-primary me-2", function() {
+                        n.close();
+                    })
+                ]
+            });
+
+            n.show();
+        }); //end of ban
+        // unBan
+        $("tbody").on("click", ".unBan", function(e) {
+            var that = $(this);
+            e.preventDefault();
+            var n = new Noty({
+                text: "Confirm Un Banned",
+                type: "success",
+                killer: true,
+                buttons: [
+                    Noty.button("Yes", "btn btn-success me-2", function() {
+                        that.closest("form").submit();
+                    }),
+
+                    Noty.button("No", "btn btn-primary me-2", function() {
+                        n.close();
+                    })
+                ]
+            });
+
+            n.show();
+        }); //end of delete
     }); //end of ready
 </script>

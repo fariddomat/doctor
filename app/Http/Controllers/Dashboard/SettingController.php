@@ -56,6 +56,11 @@ class SettingController extends Controller
         return view('dashboard.settings.social');
     }
 
+    public function services()
+    {
+        return view('dashboard.settings.services');
+    }
+
     public function settings(Request $request)
     {
         setting($request->all())->save();

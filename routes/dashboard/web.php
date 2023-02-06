@@ -28,6 +28,7 @@ Route::prefix('dashboard')
         Route::post('updateImages', 'SettingController@updateImages')->name('updateImages');
         Route::get('about', 'SettingController@about')->name('about');
         Route::get('social', 'SettingController@social')->name('social');
+        Route::get('services', 'SettingController@services')->name('services');
         Route::post('settings', 'SettingController@settings')->name('settings');
         Route::get('log', 'SettingController@log')->name('log');
 

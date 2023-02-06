@@ -14,7 +14,8 @@ class CreateDateOfWorksTable extends Migration
     public function up()
     {
         Schema::create('date_of_works', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
             $table->date('start');
             $table->date('end');
             $table->time('from');

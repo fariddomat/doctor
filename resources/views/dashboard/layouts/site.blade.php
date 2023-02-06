@@ -34,7 +34,7 @@
     <header class="navbar">
         <div class="container-fluid">
             <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-            <a class="navbar-brand" href="#"></a>
+            <a class="navbar-brand" href="{{ route('home') }}"></a>
             <ul class="nav navbar-nav hidden-md-down">
                 <li class="nav-item">
                     <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
@@ -116,6 +116,12 @@
                             <a class="nav-link" href="{{ route('dashboard.about') }}"><i
                                     class="icon-info"></i>
                                 About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.services') }}"><i
+                                    class="fa fa-archive"></i>
+                                Services</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('dashboard.social') }}"><i class="icon-share"></i>

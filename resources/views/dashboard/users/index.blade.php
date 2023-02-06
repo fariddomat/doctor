@@ -89,7 +89,7 @@
                                                             method="POST" style="display: inline-block">
                                                             @csrf
                                                             @method('post')
-                                                            <button type="submit" class="btn btn-outline-info"
+                                                            <button type="submit" class="btn btn-outline-info ban"
                                                                 style="display: inline-block"><i class="fa fa-ban"
                                                                     aria-hidden="true"></i> Ban</button>
                                                         </form>
@@ -98,7 +98,7 @@
                                                             method="POST" style="display: inline-block">
                                                             @csrf
                                                             @method('post')
-                                                            <button type="submit" class="btn btn-outline-success"
+                                                            <button type="submit" class="btn btn-outline-success unBan"
                                                                 style="display: inline-block"><i class="fa fa-ban"
                                                                     aria-hidden="true"></i> UnBan</button>
                                                         </form>
