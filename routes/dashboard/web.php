@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('dashboard')
     ->name('dashboard.')
-    ->middleware(['auth', 'role:doctor'])
+    ->middleware(['auth', 'role:doctor|secr'])
     ->group(function () {
 
         Route::get('home', function () {
@@ -29,6 +29,7 @@ Route::prefix('dashboard')
         Route::get('about', 'SettingController@about')->name('about');
         Route::get('social', 'SettingController@social')->name('social');
         Route::get('services', 'SettingController@services')->name('services');
+        Route::get('question', 'SettingController@question')->name('question');
         Route::post('settings', 'SettingController@settings')->name('settings');
         Route::get('log', 'SettingController@log')->name('log');
 

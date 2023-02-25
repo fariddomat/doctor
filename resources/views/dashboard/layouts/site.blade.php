@@ -51,8 +51,6 @@
                         <div class="dropdown-header text-xs-center">
                             <strong>Settings</strong>
                         </div>
-                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                        <div class="divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                              onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">
@@ -79,10 +77,13 @@
                 <li class="nav-title">
                     Management
                 </li>
+
+                @if (Auth::user()->hasRole('doctor'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.users.index') }}"><i class="icon-people"></i>
                         Users</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.types.index') }}"><i class="icon-folder-alt "></i>
                         Types</a>
@@ -99,9 +100,11 @@
                     <a class="nav-link" href="{{ route('dashboard.patients.index') }}"><i class="icon-user"></i> Patients</a>
                 </li>
 
+                @if (Auth::user()->hasRole('doctor'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.log') }}"><i class="fa fa-history"></i> Log</a>
                 </li>
+                @endif
                 <li class="divider"></li>
                 <li class="nav-title">
                     Extras
@@ -109,6 +112,19 @@
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link" href="{{ route('dashboard.profile') }}"><i class="icon-user"></i> Profile</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                             onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                             <i class="fa fa-lock"></i> Logout
+                         </a>
+
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                             @csrf
+                         </form>
+                </li>
+                @if (Auth::user()->hasRole('doctor'))
+
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> Settings</a>
                     <ul class="nav-dropdown-items">
@@ -124,6 +140,11 @@
                                 Services</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.question') }}"><i
+                                    class="fa fa-question-circle "></i>
+                                Questions</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('dashboard.social') }}"><i class="icon-share"></i>
                                 Social</a>
                         </li>
@@ -133,6 +154,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </nav>
     </div>

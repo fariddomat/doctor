@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:doctor|secr']);
+    }
     public function index()
     {
 

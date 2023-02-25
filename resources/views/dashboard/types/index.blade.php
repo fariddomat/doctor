@@ -42,6 +42,7 @@
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Price</th>
+                                            <th>Count</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,7 @@
                                                 <td>{{ $type->name }}</td>
                                                 <td>{{ $type->description }}</td>
                                                 <td>{{ $type->price }}</td>
+                                                <td>{{ $type->appointments->count() }}</td>
                                                 <td>
 
                                                     <a href="{{ route('dashboard.types.edit', $type->id) }}"

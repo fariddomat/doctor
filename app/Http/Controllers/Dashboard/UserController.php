@@ -13,6 +13,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['role:doctor']);
     }
     /**
      * Display a listing of the resource.

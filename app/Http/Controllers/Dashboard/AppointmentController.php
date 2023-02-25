@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:doctor|secr']);
+    }
     /**
      * Display a listing of the resource.
      *

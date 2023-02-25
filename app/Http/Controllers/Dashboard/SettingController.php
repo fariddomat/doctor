@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:doctor']);
+    }
 
     public function images()
     {
@@ -59,6 +63,12 @@ class SettingController extends Controller
     public function services()
     {
         return view('dashboard.settings.services');
+    }
+
+    public function question()
+    {
+        return view('dashboard.settings.question');
+
     }
 
     public function settings(Request $request)

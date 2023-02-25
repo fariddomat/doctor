@@ -1,16 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Dashboard;
-
 use App\Http\Controllers\Controller;
 use App\SettingLog;
 use App\Type;
 use Illuminate\Http\Request;
-
-use function GuzzleHttp\Promise\all;
-
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:doctor|secr']);
+
+    }
     /**
      * Display a listing of the resource.
      *

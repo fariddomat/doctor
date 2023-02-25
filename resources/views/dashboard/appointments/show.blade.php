@@ -55,10 +55,12 @@
                         <label for="name">Price </label>
                         <input type="number" name="price" value="{{ old('price',$appointment->price) }}" id="" class="form-control">
                     </div>
+                    @if (Auth::user()->hasRole('doctor'))
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
                             Update</button>
                     </div>
+                    @endif
                 </form>
             </div>
         </div>
