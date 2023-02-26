@@ -26,11 +26,17 @@ Route::prefix('dashboard')
 
         Route::get('images', 'SettingController@images')->name('images');
         Route::post('updateImages', 'SettingController@updateImages')->name('updateImages');
+
+        Route::get('gallery', 'SettingController@gallery')->name('gallery');
+        Route::post('updateGallery', 'SettingController@updateGallery')->name('updateGallery');
+
         Route::get('about', 'SettingController@about')->name('about');
         Route::get('social', 'SettingController@social')->name('social');
         Route::get('services', 'SettingController@services')->name('services');
         Route::get('question', 'SettingController@question')->name('question');
+
         Route::post('settings', 'SettingController@settings')->name('settings');
+        
         Route::get('log', 'SettingController@log')->name('log');
 
 

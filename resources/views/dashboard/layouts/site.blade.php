@@ -152,6 +152,11 @@
                             <a class="nav-link" href="{{ route('dashboard.images') }}"><i class="icon-picture"></i>
                                 Images</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.gallery') }}"><i class="fa fa-file-image-o "></i>
+                                Gallery</a>
+                        </li>
                     </ul>
                 </li>
                 @endif

@@ -50,6 +50,39 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
+    public function gallery()
+    {
+        return view('dashboard.settings.gallery');
+    }
+
+
+    public function updateGallery(Request $request)
+    {
+        for ($i = 1; $i <= 8; $i++) {
+            $img="image_".$i;
+            // dd($request->image[$i-1]);
+            try {
+                if ($request->image[$i-1]) {
+                $image_path = public_path("home/images/gallery/$img.jpg");
+                // dd($image_path);
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+                $request->image[$i-1]->move(public_path('/home/images/gallery'), "$img.jpg");
+                // dd('true');
+            }
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
+        }
+
+
+        SettingLog::log('success', auth()->id(), 'Update Gallery', null);
+        session()->flash('success', 'Successfully updated !');
+        return redirect()->back();
+    }
+
     public function about()
     {
         return view('dashboard.settings.about');
@@ -68,7 +101,6 @@ class SettingController extends Controller
     public function question()
     {
         return view('dashboard.settings.question');
-
     }
 
     public function settings(Request $request)
@@ -81,7 +113,7 @@ class SettingController extends Controller
 
     public function log()
     {
-        $logs=SettingLog::orderBy('created_at','asc')->paginate(10);
-        return view('dashboard.settings.log',compact('logs'));
+        $logs = SettingLog::orderBy('created_at', 'asc')->paginate(10);
+        return view('dashboard.settings.log', compact('logs'));
     }
 }
