@@ -15,6 +15,7 @@ class HomeController extends Controller
         $patients=User::whereRole('user')->count();
         $appointments=Appointment::count();
         $types=Type::count();
-        return view('home.index', compact('patients', 'appointments', 'types'));
+        $doctors=User::whereRole('doctor')->get();
+        return view('home.index', compact('patients', 'appointments', 'types', 'doctors'));
     }
 }

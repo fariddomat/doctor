@@ -6,6 +6,7 @@ use App\Appointment;
 use App\DateOfWork;
 use App\Http\Controllers\Controller;
 use App\SettingLog;
+use App\Treatment;
 use App\Type;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class AppointmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:doctor|secr']);
+        $this->middleware(['role:admin|doctor|secr']);
     }
     /**
      * Display a listing of the resource.
@@ -69,6 +70,7 @@ class AppointmentController extends Controller
     public function show($id)
     {
         $appointment = Appointment::findOrFail($id);
+
         return view('dashboard.appointments.show', compact('appointment'));
     }
 
@@ -96,28 +98,28 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $appointment = Appointment::findOrFail($id);
-        if (!$request->docotr_report) {
-            $request->validate([
-                'user_id' => 'required',
-                'type_id' => 'required',
-                'appointment_time' => 'required',
-                'appointment_date' => 'required',
-            ]);
+        // $appointment = Appointment::findOrFail($id);
+        // if (!$request->docotr_report) {
+        //     $request->validate([
+        //         'user_id' => 'required',
+        //         'type_id' => 'required',
+        //         'appointment_time' => 'required',
+        //         'appointment_date' => 'required',
+        //     ]);
 
-            SettingLog::log('warning', auth()->id(), 'Update Appointment - Patient name : ' . User::find($request->user_id)->name, route('dashboard.appointments.show', $appointment->id));
-        } else {
-            $request->validate([
-                'docotr_report' => 'required',
-                'price' => 'required',
-            ]);
+        //     SettingLog::log('warning', auth()->id(), 'Update Appointment - Patient name : ' . User::find($request->user_id)->name, route('dashboard.appointments.show', $appointment->id));
+        // } else {
+        //     $request->validate([
+        //         'docotr_report' => 'required',
+        //         'price' => 'required',
+        //     ]);
 
-            SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
-        }
-        $appointment->update($request->all());
+        //     SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
+        // }
+        // $appointment->update($request->all());
 
-        session()->flash('success', 'Updated Successfully !');
-        return redirect()->route('dashboard.appointments.index');
+        // session()->flash('success', 'Updated Successfully !');
+        // return redirect()->route('dashboard.appointments.index');
     }
 
     /**

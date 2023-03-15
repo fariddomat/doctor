@@ -15,6 +15,17 @@
                     @include('dashboard.layouts._error')
 
                     <div class="form-group">
+                        <label for="name">Doctor</label>
+                        <select name="doctor_id" id="" class="form-control">
+                            @foreach ($doctors as $doctor)
+                            <option value="{{ $doctor->id }}" @if ($doctor->id == $dateOfWork->doctor_id)
+                                selected
+                            @endif>{{ $doctor->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="name">Start Date</label>
                         <input type="date" class="form-control" name="start" id="start" value="{{ old('start',$dateOfWork->start) }}"
                             aria-describedby="helpId" placeholder="">

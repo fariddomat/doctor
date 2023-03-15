@@ -12,10 +12,13 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'doctor' => [
+        'admin' => [
             'settings' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
+        'doctor' => [
+        ]
+        ,
         'secr' => [
         ]
         ,

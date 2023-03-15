@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Dashboard;
 use App\DateOfWork;
 use App\Http\Controllers\Controller;
 use App\SettingLog;
+use App\User;
 use Illuminate\Http\Request;
 
 class DateOfWorkController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:doctor|secr']);
+        $this->middleware(['role:admin|doctor|secr']);
     }
     /**
      * Display a listing of the resource.
@@ -31,7 +32,8 @@ class DateOfWorkController extends Controller
      */
     public function create()
     {
-        return view('dashboard.dateOfWorks.create');
+        $doctors=User::whereRole('doctor')->get();
+        return view('dashboard.dateOfWorks.create', compact('doctors'));
     }
 
     /**
@@ -75,7 +77,8 @@ class DateOfWorkController extends Controller
     public function edit($id)
     {
         $dateOfWork=DateOfWork::findOrFail($id);
-        return view('dashboard.dateOfWorks.edit', compact('dateOfWork'));
+        $doctors=User::whereRole('doctor')->get();
+        return view('dashboard.dateOfWorks.edit', compact('dateOfWork', 'doctors'));
     }
 
     /**

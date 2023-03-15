@@ -39,6 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Doctor</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
                                             <th>From</th>
@@ -52,6 +53,7 @@
                                         @foreach ($dateOfWorks as $index => $dateOfWork)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
+                                                <td>{{ $dateOfWork->doctor->name }}</td>
                                                 <td>{{ $dateOfWork->start }}</td>
                                                 <td>{{ $dateOfWork->end }}</td>
                                                 <td>{{ $dateOfWork->from }}</td>

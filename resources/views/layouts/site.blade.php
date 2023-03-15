@@ -85,7 +85,7 @@
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
 
                     @auth
-                    @if (Auth::user()->hasRole(['doctor','secr']))
+                    @if (Auth::user()->hasRole(['admin', 'doctor','secr']))
                     <li><a class="nav-link scrollto" href="{{ route('dashboard.home') }}">Dashboard</a></li>
 
                     @endif

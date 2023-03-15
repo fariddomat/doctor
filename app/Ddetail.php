@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DateOfWork extends Model
+class Ddetail extends Model
 {
     protected $guarded=[];
 

@@ -16,15 +16,24 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->unsignedBigInteger('sec_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('date_of_work_id')->nullable();
             $table->time('appointment_time');
             $table->date('appointment_date');
             $table->string('user_message')->nullable();
-            $table->string('docotr_report')->nullable();
-            $table->integer('price')->nullable();
+
+            // $table->string('docotr_report')->nullable();
+            // $table->integer('price')->nullable();
+
+            $table->string('status')->default('pending');
+
             $table->timestamps();
+
+            $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sec_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->foreign('date_of_work_id')->references('id')->on('date_of_works')->onDelete('cascade');

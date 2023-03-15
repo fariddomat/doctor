@@ -8,7 +8,7 @@ class TypeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:doctor|secr']);
+        $this->middleware(['role:admin|doctor|secr']);
 
     }
     /**

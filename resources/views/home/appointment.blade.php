@@ -36,7 +36,18 @@
                                 @endforeach
                             @endif
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                            <div class="col-md-4 form-group mt-3">
+                            <div class="col-md-3 form-group mt-3">
+                                <select name="doctor_id" id="doctor_id" class="form-select">
+                                    <option value="">Select Doctor</option>
+                                    @foreach ($doctors as $doctor)
+                                        <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="validate">
+
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group mt-3">
                                 <select name="type_id" id="type_id" class="form-select">
                                     <option value="">Select Type</option>
                                     @foreach ($types as $type)
@@ -47,14 +58,14 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-4 form-group mt-3">
+                            <div class="col-md-3 form-group mt-3">
                                 <input type="date" name="appointment_date" class="form-control datepicker" id="date"
                                     placeholder="Appointment Date" data-rule="minlen:4"
                                     data-msg="Please enter at least 4 chars">
                                 <div class="validate"></div>
                             </div>
 
-                            <div class="col-md-4 form-group mt-3">
+                            <div class="col-md-3 form-group mt-3">
                                 <input type="time" name="appointment_time" class="form-control datepicker" id="date"
                                     placeholder="Appointment Time" data-rule="minlen:4"
                                     data-msg="Please enter at least 4 chars">

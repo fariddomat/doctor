@@ -15,7 +15,8 @@ class PatientController extends Controller
     public function appointment()
     {
             $types=Type::all();
-            return view('home.appointment', compact('types'));
+            $doctors=User::whereRole('doctor')->get();
+            return view('home.appointment', compact('types', 'doctors'));
 
     }
 
@@ -23,6 +24,7 @@ class PatientController extends Controller
     {
         $request->validate([
             'user_id'=>'required',
+            'doctor_id'=>'required',
             'type_id'=>'required',
             'appointment_time'=>'required',
             'appointment_date'=>'required',

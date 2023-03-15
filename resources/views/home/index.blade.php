@@ -65,7 +65,7 @@
 
                     <div
                         class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-                        <h3>About Doctor</h3>
+                        <h3>About DrSmile</h3>
                         {!! setting('site_about_doctor') !!}
 
                         <div class="icon-box">
@@ -165,6 +165,42 @@
 
             </div>
         </section><!-- End Services Section -->
+
+        <!-- ======= Doctors Section ======= -->
+    <section id="doctors" class="doctors">
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Doctors</h2>
+            </div>
+
+          <div class="row">
+
+            @foreach ($doctors as $doctor)
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="member d-flex align-items-start">
+                  <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
+                  <div class="member-info">
+                    <h4>{{ $doctor->name }}</h4>
+                    <span>Anesthesiologist</span>
+                    <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                    <div class="social">
+                      <a href=""><i class="ri-twitter-fill"></i></a>
+                      <a href=""><i class="ri-facebook-fill"></i></a>
+                      <a href=""><i class="ri-instagram-fill"></i></a>
+                      <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endforeach
+
+
+
+          </div>
+
+        </div>
+      </section><!-- End Doctors Section -->
 
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="faq" class="faq section-bg">

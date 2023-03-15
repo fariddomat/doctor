@@ -40,27 +40,70 @@
                 <i class="fa fa-align-justify"></i>Docotr Report
             </div>
             <div class="card-block ">
-                <form action="{{ route('dashboard.appointments.update', $appointment->id) }}" method="POST">
+                <form action="{{ route('dashboard.treatments.store', ['appointment_id' => $appointment->id]) }}"
+                    method="POST">
                     @csrf
-                    @method('put')
+                    @method('post')
                     @include('dashboard.layouts._error')
 
 
 
                     <div class="form-group ">
                         <label for="name">Report </label>
-                        <textarea name="docotr_report" id="" cols="30" rows="5" class="form-control">{{ old('docotr_report', $appointment->docotr_report) }}</textarea>
+                        <textarea name="report" id="" cols="30" rows="5" class="form-control">
+                            @if ($appointment->treatment)
+{{ old('report', $appointment->treatment->report) }}
+@else
+{{ old('report') }}
+@endif
+                        </textarea>
                     </div>
-                    <div class="form-group ">
-                        <label for="name">Price </label>
-                        <input type="number" name="price" value="{{ old('price',$appointment->price) }}" id="" class="form-control">
-                    </div>
-                    @if (Auth::user()->hasRole('doctor'))
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
-                            Update</button>
-                    </div>
+                    @if ($appointment->treatment)
+                        <div class="form-group ">
+                            <label for="name">Fee
+                                @if ($appointment->treatment)
+                                    @if ($appointment->treatment->Paid == 1)
+                                        <span class="text-success">( Paid )</span>
+                                    @endif
+                                @endif
+                            </label>
+                            <input type="number" name="fee" value="{{ $appointment->treatment->fee }}" id=""
+                                class="form-control">
+                        </div>
+                    @else
+                        <div class="form-group ">
+                            <label for="name">Fee
+                            </label>
+                            <input type="number" name="fee" value="{{ old('fee') }}" id=""
+                                class="form-control">
+                        </div>
                     @endif
+
+
+                    @if (!$appointment->treatment)
+                        <div class="form-group ">
+                            <label for="name">Paid Fee amount</label>
+                            <input type="number" name="amount" id="" class="form-control">
+                        </div>
+                    @endif
+                    <div class="form-group ">
+                        <label for="name">Note (optional)</label>
+                        <textarea name="note" id="" class="form-control"> @if ($appointment->treatment)
+{{ old('note', $appointment->treatment->note) }}
+@else
+{{ old('note') }}
+@endif
+                        </textarea>
+                    </div>
+                    @if (!$appointment->treatment)
+                        @if (Auth::user()->hasRole('doctor'))
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Save</button>
+                            </div>
+                        @endif
+                    @endif
+
                 </form>
             </div>
         </div>

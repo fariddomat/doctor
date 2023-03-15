@@ -23,9 +23,14 @@ Route::get('/clear', function () {
     Artisan::call('config:cache');
     Artisan::call('view:clear');
     Artisan::call('route:clear');
-
+    // shell_exec('composer update');
     return "Cleared!";
 });
+
+// Route::get('/migrate', function () {
+//     Artisan::call('migrate:fresh --seed');
+//     return "migrated!";
+// });
 Auth::routes();
 
 Route::middleware(['auth'])

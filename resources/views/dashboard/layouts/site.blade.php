@@ -78,7 +78,7 @@
                     Management
                 </li>
 
-                @if (Auth::user()->hasRole('doctor'))
+                @if (Auth::user()->hasRole('admin'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.users.index') }}"><i class="icon-people"></i>
                         Users</a>
@@ -100,7 +100,7 @@
                     <a class="nav-link" href="{{ route('dashboard.patients.index') }}"><i class="icon-user"></i> Patients</a>
                 </li>
 
-                @if (Auth::user()->hasRole('doctor'))
+                @if (Auth::user()->hasRole('admin'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.log') }}"><i class="fa fa-history"></i> Log</a>
                 </li>
@@ -123,7 +123,7 @@
                              @csrf
                          </form>
                 </li>
-                @if (Auth::user()->hasRole('doctor'))
+                @if (Auth::user()->hasRole('admin'))
 
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> Settings</a>

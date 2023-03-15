@@ -77,4 +77,9 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
+    public function ddetail()
+    {
+        return $this->hasOne(Ddetail::class);
+    }
+
 }

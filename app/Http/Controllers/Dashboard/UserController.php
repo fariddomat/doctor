@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:doctor']);
+        $this->middleware(['role:admin']);
     }
     /**
      * Display a listing of the resource.
@@ -23,9 +23,9 @@ class UserController extends Controller
     public function index()
     {
         // dd(true);
-        $roles = Role::whereRoleNot(['doctor'])->get();
+        $roles = Role::whereRoleNot(['admin'])->get();
 
-        $users = User::whereRoleNot(['doctor'])
+        $users = User::whereRoleNot(['admin'])
             ->whenSearch(request()->search)
             ->whenRole(request()->role_id)
             ->with('roles')
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::whereRoleNot(['doctor'])->get();
+        $roles = Role::whereRoleNot(['admin'])->get();
         return view('dashboard.users.create', compact('roles'));
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::whereRoleNot(['doctor'])->get();
+        $roles = Role::whereRoleNot(['admin'])->get();
 
         $user = User::findOrFail($id);
         return view('dashboard.users.edit', compact('roles', 'user'));
