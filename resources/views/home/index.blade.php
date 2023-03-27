@@ -101,8 +101,8 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="count-box">
                             <i class="fas fa-user-plus"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ $patients }}" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $patients }}"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p>Patient</p>
                         </div>
                     </div>
@@ -110,26 +110,26 @@
                     <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
                         <div class="count-box">
                             <i class="far fa-hospital"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ $appointments }}" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $appointments }}"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p>Appointments</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                         <div class="count-box">
-                            <i class="fas fa-flask"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ $types }}" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p>Types</p>
+                            <i class="fas fa-user-md"></i>
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $doctors->count() }}"
+                                data-purecounter-duration="1" class="purecounter"></span>
+                            <p>Doctors</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                         <div class="count-box">
                             <i class="fas fa-award"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ setting('site_awards_count') }}" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="{{ setting('site_awards_count') }}"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p>Awards</p>
                         </div>
                     </div>
@@ -152,13 +152,13 @@
 
                 <div class="row">
                     @for ($i = 1; $i <= 6; $i++)
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch  mt-4 mb-2">
-                        <div class="icon-box">
-                            <div class="icon"><i class="fas fa-{{ setting('service_icon_' . $i) }}"></i></div>
-                            <h4><a href="">{{ setting('title' . $i) }}</a></h4>
-                            <p>{{ setting('service_content_' . $i) }}</p>
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch  mt-4 mb-2">
+                            <div class="icon-box">
+                                <div class="icon"><i class="fas fa-{{ setting('service_icon_' . $i) }}"></i></div>
+                                <h4><a href="">{{ setting('title' . $i) }}</a></h4>
+                                <p>{{ setting('service_content_' . $i) }}</p>
+                            </div>
                         </div>
-                    </div>
                     @endfor
 
                 </div>
@@ -167,40 +167,59 @@
         </section><!-- End Services Section -->
 
         <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors">
-        <div class="container">
+        <section id="doctors" class="doctors">
+            <div class="container">
 
-          <div class="section-title">
-            <h2>Doctors</h2>
-            </div>
-
-          <div class="row">
-
-            @foreach ($doctors as $doctor)
-            <div class="col-lg-6 mt-4 mt-lg-0">
-                <div class="member d-flex align-items-start">
-                  <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>{{ $doctor->name }}</h4>
-                    <span>Anesthesiologist</span>
-                    <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                    <div class="social">
-                      <a href=""><i class="ri-twitter-fill"></i></a>
-                      <a href=""><i class="ri-facebook-fill"></i></a>
-                      <a href=""><i class="ri-instagram-fill"></i></a>
-                      <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                    </div>
-                  </div>
+                <div class="section-title">
+                    <h2>Doctors</h2>
                 </div>
-              </div>
-            @endforeach
+
+                <div class="row">
+
+                    @foreach ($doctors as $doctor)
+                        @if ($doctor->ddetail)
+                        <div class="col-lg-6 mt-4 mt-lg-0">
+                            <div class="member d-flex align-items-start">
+                                <div class="pic"><img src="{{ asset('storage/images/' . $doctor->ddetail->img) }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>{{ $doctor->name }}</h4>
+                                    <span>{{ $doctor->ddetail->spec }}</span>
+                                    <p>{{ $doctor->ddetail->qout }}</p>
+                                    <div class="social">
+                                        @if ($doctor->ddetail->twitter)
+
+                                        <a href="{{ $doctor->ddetail->twitter }}"><i class="ri-twitter-fill"></i></a>
+                                        @endif
+                                        @if ($doctor->ddetail->facebook)
+
+                                        <a href="{{ $doctor->ddetail->facebook }}"><i class="ri-facebook-fill"></i></a>
+                                        @endif
+                                        @if ($doctor->ddetail->instagram)
+
+                                        <a href="{{ $doctor->ddetail->instagram }}"><i class="ri-instagram-fill"></i></a>
+                                        @endif
+                                        @if ($doctor->ddetail->linkedIn)
+
+                                        <a href="{{ $doctor->ddetail->linkedIn }}"> <i class="ri-linkedin-box-fill"></i> </a>
+                                        @endif
+                                        @if ($doctor->ddetail->whatsapp)
+
+                                        <a href="{{ $doctor->ddetail->whatsapp }}"> <i class="ri-whatsapp-fill"></i> </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
 
 
 
-          </div>
+                </div>
 
-        </div>
-      </section><!-- End Doctors Section -->
+            </div>
+        </section><!-- End Doctors Section -->
 
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="faq" class="faq section-bg">
@@ -215,19 +234,19 @@
 
                 <div class="faq-list">
                     <ul>
-                        @for ($i=1; $i<=5; $i++)
-
-                        <li data-aos="fade-up" data-aos-delay="{{ ($i-1)*100 }}">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                data-bs-target="#faq-list-{{ $i }}" class="collapsed">{{ setting('question_'.$i) }}
-                                <i class="bx bx-chevron-down icon-show"></i><i
-                                    class="bx bx-chevron-up icon-close"></i></a>
-                            <div id="faq-list-{{ $i }}" class="collapse" data-bs-parent=".faq-list">
-                                <p>
-                                    {{ setting('answer_'.$i) }}
-                                </p>
-                            </div>
-                        </li>
+                        @for ($i = 1; $i <= 5; $i++)
+                            <li data-aos="fade-up" data-aos-delay="{{ ($i - 1) * 100 }}">
+                                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                                    data-bs-target="#faq-list-{{ $i }}"
+                                    class="collapsed">{{ setting('question_' . $i) }}
+                                    <i class="bx bx-chevron-down icon-show"></i><i
+                                        class="bx bx-chevron-up icon-close"></i></a>
+                                <div id="faq-list-{{ $i }}" class="collapse" data-bs-parent=".faq-list">
+                                    <p>
+                                        {{ setting('answer_' . $i) }}
+                                    </p>
+                                </div>
+                            </li>
                         @endfor
 
 
@@ -252,14 +271,15 @@
             <div class="container-fluid">
                 <div class="row g-0">
 
-                    @for ($i=1 ; $i<=8 ; $i++)
-                    <div class="col-lg-3 col-md-4">
-                        <div class="gallery-item">
-                            <a href="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" class="galelry-lightbox">
-                                <img src="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" alt="" class="img-fluid">
-                            </a>
+                    @for ($i = 1; $i <= 8; $i++)
+                        <div class="col-lg-3 col-md-4">
+                            <div class="gallery-item">
+                                <a href="{{ asset('home/images/gallery/image_' . $i . '.jpg') }}" class="galelry-lightbox">
+                                    <img src="{{ asset('home/images/gallery/image_' . $i . '.jpg') }}" alt=""
+                                        class="img-fluid">
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @endfor
 
 

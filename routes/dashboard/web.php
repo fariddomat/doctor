@@ -25,6 +25,7 @@ Route::prefix('dashboard')
         Route::resource('treatments', 'TreatmentController');
         Route::resource('patients', 'PatientController');
         Route::resource('paymentlog', 'PaymentlogController');
+        Route::resource('ddetails', 'DdetailController');
 
         Route::get('images', 'SettingController@images')->name('images');
         Route::post('updateImages', 'SettingController@updateImages')->name('updateImages');

@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function ddetail()
     {
-        return $this->hasOne(Ddetail::class);
+        return $this->hasOne(Ddetail::class, 'doctor_id');
     }
 
 }

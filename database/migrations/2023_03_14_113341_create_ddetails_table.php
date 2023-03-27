@@ -17,6 +17,14 @@ class CreateDdetailsTable extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->unsignedBigInteger('doctor_id');
+            $table->string('spec');
+            $table->string('qout');
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedIn')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('img')->nullable();
             $table->timestamps();
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
 
