@@ -1,5 +1,8 @@
 @extends('dashboard.layouts.site')
 
+@push('scripts')
+<script src="{{asset('dashboard/js/about_image_preview.js')}}"></script>
+@endpush
 @section('content')
     <div class="col-lg-12">
         <div class="card">
@@ -19,8 +22,8 @@
 
                         <div class="col-md-3">
                             <label>Image {{ $i }}</label>
-                            <input type="file" name="image[]" class="form-control-file">
-                            <img src="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" style=" margin-top: 10px; max-width: 250px;"
+                            <input type="file" name="image[]" class="form-control-file image{{ $i }}">
+                            <img src="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" style=" margin-top: 10px; max-width: 250px;"class="img-thumbnail image{{ $i }}-preview "
                                 alt="">
                         </div>
                         @endfor

@@ -110,3 +110,19 @@ $(".image7").change(function () {
     $(".image7-preview").hide();
   }
 });
+
+$(".image8").change(function () {
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $(".image8-preview").attr("src", e.target.result);
+        $(".image8-preview").show();
+      };
+
+      reader.readAsDataURL(this.files[0]);
+    } else {
+      $(".image8-preview").attr("src", "");
+      $(".image8-preview").hide();
+    }
+  });
