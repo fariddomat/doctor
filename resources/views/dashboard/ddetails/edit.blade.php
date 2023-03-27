@@ -2,6 +2,10 @@
 @section('title')
     Create Details
 @endsection
+
+@push('scripts')
+<script src="{{asset('dashboard/js/image_preview.js')}}"></script>
+@endpush
 @section('content')
     <div class="col-lg-12">
         <div class="card">
@@ -59,9 +63,14 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Image</label>
-                        <input type="file" class="form-control" name="img" id="img"
+                        <input type="file" class="form-control image" name="img" id="img"
                             aria-describedby="helpId" placeholder="">
-                            <img src="{{ asset('storage/images/'.$ddetail->img) }}" alt="">
+                            {{-- <img src="" alt=""> --}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <img src="{{ asset('storage/images/'.$ddetail->img) }}" style="width: 300px;" class="img-thumbnail image-preview"
+                            alt="">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i>
