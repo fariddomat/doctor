@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.site')
 @section('title')
-    Manage dateOfWorks
+    Manage dayOfWorks
 @endsection
 @section('content')
 
@@ -18,7 +18,7 @@
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"
                                         aria-hidden="true"></i>
                                     Search</button>
-                                    <a href="{{ route('dashboard.dateOfWorks.create') }}" class="btn btn-outline-primary"><i
+                                    <a href="{{ route('dashboard.dayOfWorks.create') }}" class="btn btn-outline-primary"><i
                                             class="fa fa-plus" aria-hidden="true"></i> Create</a>
 
                             </div>
@@ -34,39 +34,31 @@
                         </div>
                         <div class="card-block table-responsive">
 
-                            @if ($dateOfWorks->count() > 0)
+                            @if ($dayOfWorks->count() > 0)
                                 <table id="dataTable" class="table table-striped display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Doctor</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>From</th>
-                                            <th>To</th>
+                                            <th>Day</th>
                                             <th>Action</th>
 
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($dateOfWorks as $index => $dateOfWork)
+                                        @foreach ($dayOfWorks as $index => $dayOfWork)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $dateOfWork->doctor->name }}</td>
-                                                <td>{{ $dateOfWork->start }}</td>
-                                                <td>{{ $dateOfWork->end }}</td>
-                                                <td>{{ $dateOfWork->from }}</td>
-                                                <td>{{ $dateOfWork->to }}</td>
+                                                <td>{{ $dayOfWork->day }}</td>
 
                                                 <td>
 
-                                                    <a href="{{ route('dashboard.dateOfWorks.edit', $dateOfWork->id) }}"
+                                                    <a href="{{ route('dashboard.dayOfWorks.edit', $dayOfWork->id) }}"
                                                         class="btn btn-outline-warning" style="display: inline-block"><i
                                                             class="fa fa-edit"></i> Edit</a>
 
 
-                                                    <form action="{{ route('dashboard.dateOfWorks.destroy', $dateOfWork->id) }}"
+                                                    <form action="{{ route('dashboard.dayOfWorks.destroy', $dayOfWork->id) }}"
                                                         method="POST" style="display: inline-block">
                                                         @csrf
                                                         @method('delete')
@@ -85,7 +77,7 @@
                                     </tbody>
                                 </table>
 
-                                <div class="text-center m-auto">{{ $dateOfWorks->appends(request()->query())->links() }}</div>
+                                <div class="text-center m-auto">{{ $dayOfWorks->appends(request()->query())->links() }}</div>
                             @else
                                 <h3 style="font-weight: 400">Sorry no record found !</h3>
                             @endif

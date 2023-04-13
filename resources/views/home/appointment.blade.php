@@ -16,7 +16,7 @@
 @push('scripts')
     <script>
         $(function() {
-            var availableDates = {!! json_encode($dateOfWorks->pluck('dates')->toArray()) !!};
+            var availableDates = {!! json_encode($dayOfWorks->pluck('dates')->toArray()) !!};
 
             $("#appointment_date").datepicker({
                 beforeShowDay: function(date) {
@@ -89,7 +89,7 @@
 
                             <div class="col-md-3 form-group mt-3">
                                 <select name="appointment_date">
-                                    @foreach ($dateOfWorks->flatMap->dates as $date)
+                                    @foreach ($dayOfWorks->flatMap->dates as $date)
                                         <option value="{{ $date }}">{{ $date }}</option>
                                     @endforeach
                                 </select>

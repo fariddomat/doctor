@@ -17,9 +17,9 @@ class PatientController extends Controller
     {
             $types=Type::all();
             $doctors=User::whereRole('doctor')->get();
-            $dateOfWorks=DateOfWork::all();
-            // dd(json_encode(array_merge($dateOfWorks->pluck('dates')->toArray())));
-            return view('home.appointment', compact('types', 'doctors', 'dateOfWorks'));
+            $dayOfWorks=DateOfWork::all();
+            // dd(json_encode(array_merge($dayOfWorks->pluck('dates')->toArray())));
+            return view('home.appointment', compact('types', 'doctors', 'dayOfWorks'));
 
     }
 

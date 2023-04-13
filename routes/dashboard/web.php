@@ -20,7 +20,7 @@ Route::prefix('dashboard')
         Route::post('updateProfile', 'HomeController@updateProfile')->name('updateProfile');
 
         Route::resource('types', 'TypeController');
-        Route::resource('dateOfWorks', 'DateOfWorkController');
+        Route::resource('dayOfWorks', 'DayOfWorkController');
         Route::resource('appointments', 'AppointmentController');
         Route::resource('treatments', 'TreatmentController');
         Route::resource('patients', 'PatientController');

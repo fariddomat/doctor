@@ -89,8 +89,8 @@
                         Types</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard.dateOfWorks.index') }}"><i class="icon-calendar"></i>
-                        Date Of Work</a>
+                    <a class="nav-link" href="{{ route('dashboard.dayOfWorks.index') }}"><i class="icon-calendar"></i>
+                        Day Of Work</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.appointments.index') }}"><i class="icon-calculator"></i> Appointments</a>

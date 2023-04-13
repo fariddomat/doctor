@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\DateOfWork;
+use App\DayOfWork;
 use App\Http\Controllers\Controller;
 use App\SettingLog;
 use App\User;
 use Illuminate\Http\Request;
 
-class DateOfWorkController extends Controller
+class DayOfWorkController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class DateOfWorkController extends Controller
      */
     public function index()
     {
-        $dateOfWorks=DateOfWork::paginate(5);
-        return view('dashboard.dateOfWorks.index', compact('dateOfWorks'));
+        $dayOfWorks=DayOfWork::paginate(5);
+        return view('dashboard.dayOfWorks.index', compact('dayOfWorks'));
     }
 
     /**
@@ -33,7 +33,7 @@ class DateOfWorkController extends Controller
     public function create()
     {
         $doctors=User::whereRole('doctor')->get();
-        return view('dashboard.dateOfWorks.create', compact('doctors'));
+        return view('dashboard.dayOfWorks.create', compact('doctors'));
     }
 
     /**
@@ -45,16 +45,13 @@ class DateOfWorkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'start'=>'required',
-            'end'=>'required',
-            'from'=>'required',
-            'to'=>'required',
+            'day'=>'required'
         ]);
-        $dateOfWork=DateOfWork::create($request->all());
-        SettingLog::log('success', auth()->id(), 'Add New Date Of Work', route('dashboard.dateOfWorks.edit', $dateOfWork->id));
+        $dayOfWork=DayOfWork::create($request->all());
+        SettingLog::log('success', auth()->id(), 'Add New Day Of Work', route('dashboard.dayOfWorks.edit', $dayOfWork->id));
 
         session()->flash('success', 'Created Successfully !');
-        return redirect()->route('dashboard.dateOfWorks.index');
+        return redirect()->route('dashboard.dayOfWorks.index');
     }
 
     /**
@@ -76,9 +73,9 @@ class DateOfWorkController extends Controller
      */
     public function edit($id)
     {
-        $dateOfWork=DateOfWork::findOrFail($id);
+        $dayOfWork=DayOfWork::findOrFail($id);
         $doctors=User::whereRole('doctor')->get();
-        return view('dashboard.dateOfWorks.edit', compact('dateOfWork', 'doctors'));
+        return view('dashboard.dayOfWorks.edit', compact('dayOfWork', 'doctors'));
     }
 
     /**
@@ -91,17 +88,14 @@ class DateOfWorkController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'start'=>'required',
-            'end'=>'required',
-            'from'=>'required',
-            'to'=>'required',
+            'day'=>'required',
         ]);
-        $dateOfWork=DateOfWork::findOrFail($id);
-        $dateOfWork->update($request->all());
+        $dayOfWork=DayOfWork::findOrFail($id);
+        $dayOfWork->update($request->all());
 
-        SettingLog::log('warning', auth()->id(), 'Update Date Of Work', route('dashboard.dateOfWorks.edit', $dateOfWork->id));
+        SettingLog::log('warning', auth()->id(), 'Update Day Of Work', route('dashboard.dayOfWorks.edit', $dayOfWork->id));
         session()->flash('success', 'Updated Successfully !');
-        return redirect()->route('dashboard.dateOfWorks.index');
+        return redirect()->route('dashboard.dayOfWorks.index');
     }
 
     /**
@@ -112,11 +106,11 @@ class DateOfWorkController extends Controller
      */
     public function destroy($id)
     {
-        $dateOfWork=DateOfWork::findOrFail($id);
-        $dateOfWork->delete();
+        $dayOfWork=DayOfWork::findOrFail($id);
+        $dayOfWork->delete();
 
-        SettingLog::log('danger', auth()->id(), 'Delete Date Of Work Start : '.$dateOfWork->start.' - End : '.$dateOfWork->end,null);
+        SettingLog::log('danger', auth()->id(), 'Delete Day Of Work Start : '.$dayOfWork->start.' - End : '.$dayOfWork->end,null);
         session()->flash('success', 'Deleted Successfully !');
-        return redirect()->route('dashboard.dateOfWorks.index');
+        return redirect()->route('dashboard.dayOfWorks.index');
     }
 }
