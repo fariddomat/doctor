@@ -31,7 +31,7 @@
                         Search</button>
                     <a href="{{ route('dashboard.users.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
                             aria-hidden="true"></i> Create</a>
-                    <a href="{{ route('dashboard.ddetails.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
+                    <a href="{{ route('dashboard.doctors.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
                             aria-hidden="true"></i> Add Doctor Details</a>
 
                 </div>
@@ -106,14 +106,14 @@
                                         @endif
 
                                         @if ($user->hasRole('doctor'))
-                                        @if ($user->ddetail)
-                                        <a href="{{ route('dashboard.ddetails.edit', $user->id) }}"
+                                        @if ($user->doctor)
+                                        <a href="{{ route('dashboard.doctors.edit', $user->id) }}"
                                             class="btn btn-outline-primary" style="display: inline-block"><i
                                                 class="fa fa-edit"></i> Details</a>
 
                                     @else
 
-                                    <a href="{{ route('dashboard.ddetails.create') }}"
+                                    <a href="{{ route('dashboard.doctors.create') }}"
                                         class="btn btn-outline-primary" style="display: inline-block"><i
                                             class="fa fa-edit"></i> Add Details</a>
 

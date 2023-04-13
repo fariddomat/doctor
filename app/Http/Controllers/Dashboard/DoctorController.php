@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Ddetail;
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Session;
 
-class DdetailController extends Controller
+class DoctorController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,8 +29,8 @@ class DdetailController extends Controller
      */
     public function create()
     {
-        $doctors = User::whereRole('doctor')->doesntHave('ddetail')->get();
-        return view('dashboard.ddetails.create', compact('doctors'));
+        $doctors = User::whereRole('doctor')->doesntHave('doctor')->get();
+        return view('dashboard.doctors.create', compact('doctors'));
     }
 
     /**
@@ -42,7 +42,7 @@ class DdetailController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'doctor_id' => 'required',
+            'user_id' => 'required',
             'spec' => 'required',
             'qout' => 'required',
             // 'twitter' => 'required',
@@ -65,7 +65,7 @@ class DdetailController extends Controller
         $request_data['img'] = $request->img->hashName();
 
 
-        $ddetail = Ddetail::create($request_data);
+        $doctor = Doctor::create($request_data);
 
         session()->flash('success', 'Successfully Created !');
         return redirect()->route('dashboard.users.index');
@@ -90,9 +90,9 @@ class DdetailController extends Controller
      */
     public function edit($id)
     {
-        $doctor = User::findOrFail($id);
-        $ddetail = Ddetail::where('doctor_id', $id)->first();
-        return view('dashboard.ddetails.edit', compact('doctor', 'ddetail'));
+        $user = User::findOrFail($id);
+        $doctor = Doctor::where('user_id', $id)->first();
+        return view('dashboard.doctors.edit', compact('user', 'doctor'));
     }
 
     /**
@@ -104,7 +104,7 @@ class DdetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ddetail = Ddetail::findOrFail($id);
+        $doctor = Doctor::findOrFail($id);
         $request->validate([
             'spec' => 'required',
             'qout' => 'required',
@@ -114,8 +114,8 @@ class DdetailController extends Controller
         $request_data = $request->except(['img']);
 
         if ($request->img) {
-            if ($ddetail->img != null)
-                Storage::disk('local')->delete('public/images/' . $ddetail->img);
+            if ($doctor->img != null)
+                Storage::disk('local')->delete('public/images/' . $doctor->img);
 
             $img = Image::make($request->img)
                 ->resize(600, 600)
@@ -126,7 +126,7 @@ class DdetailController extends Controller
         }
 
 
-        $ddetail->update($request_data);
+        $doctor->update($request_data);
 
         session()->flash('success', 'Successfully Updated !');
         return redirect()->route('dashboard.users.index');

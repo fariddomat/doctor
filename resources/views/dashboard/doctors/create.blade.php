@@ -17,7 +17,7 @@
                     <a href="{{ route('dashboard.users.index') }}" class="btn btn-outline-primary"><i class="fa fa-book"
                             aria-hidden="true"></i> Users</a>
                 @else
-                    <form action="{{ route('dashboard.ddetails.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.doctors.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         @include('dashboard.layouts._error')
@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="doctor">Doctor</label>
-                            <select class="form-control" name="doctor_id" id="doctor_id">
+                            <select class="form-control" name="user_id" id="user_id">
                                 @foreach ($doctors as $doctor)
                                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
                                 @endforeach

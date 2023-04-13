@@ -13,7 +13,7 @@
                 <i class="fa fa-align-justify"></i> Create New User
             </div>
             <div class="card-block ">
-                <form action="{{ route('dashboard.ddetails.update' , $ddetail->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('dashboard.doctors.update' , $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     @include('dashboard.layouts._error')
@@ -27,38 +27,38 @@
 
                     <div class="form-group">
                         <label for="name">Spec</label>
-                        <input type="text" class="form-control" name="spec" id="spec" value="{{ old('spec', $ddetail->spec) }}"
+                        <input type="text" class="form-control" name="spec" id="spec" value="{{ old('spec', $doctor->spec) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="name">Qout</label>
-                        <input type="text" class="form-control" name="qout" id="qout" value="{{ old('qout', $ddetail->qout) }}"
+                        <input type="text" class="form-control" name="qout" id="qout" value="{{ old('qout', $doctor->qout) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group ">
                         <label for="name">Twitter</label>
-                        <input type="text" class="form-control" name="twitter" id="twitter" value="{{ old('twitter', $ddetail->twitter) }}"
+                        <input type="text" class="form-control" name="twitter" id="twitter" value="{{ old('twitter', $doctor->twitter) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group ">
                         <label for="name">Facebook</label>
-                        <input type="text" class="form-control" name="facebook" id="facebook" value="{{ old('facebook', $ddetail->facebook) }}"
+                        <input type="text" class="form-control" name="facebook" id="facebook" value="{{ old('facebook', $doctor->facebook) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group  ">
                         <label for="name">Instagram</label>
-                        <input type="text" class="form-control" name="instagram" id="instagram" value="{{ old('instagram', $ddetail->instagram) }}"
+                        <input type="text" class="form-control" name="instagram" id="instagram" value="{{ old('instagram', $doctor->instagram) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group  ">
                         <label for="name">LinkedIn</label>
-                        <input type="text" class="form-control" name="linkedIn" id="linkedIn" value="{{ old('linkedIn', $ddetail->linkedIn) }}"
+                        <input type="text" class="form-control" name="linkedIn" id="linkedIn" value="{{ old('linkedIn', $doctor->linkedIn) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group ">
                         <label for="name">Whatsapp</label>
-                        <input type="text" class="form-control" name="whatsapp" id="whatsapp" value="{{ old('whatsapp', $ddetail->whatsapp) }}"
+                        <input type="text" class="form-control" name="whatsapp" id="whatsapp" value="{{ old('whatsapp', $doctor->whatsapp) }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <img src="{{ asset('storage/images/'.$ddetail->img) }}" style="width: 300px;" class="img-thumbnail image-preview"
+                        <img src="{{ asset('storage/images/'.$doctor->img) }}" style="width: 300px;" class="img-thumbnail image-preview"
                             alt="">
                     </div>
                     <div class="form-group">
