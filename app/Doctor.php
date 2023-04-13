@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DateOfWork extends Model
+class Doctor extends Model
 {
     protected $guarded=[];
 
-    public function doctor()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

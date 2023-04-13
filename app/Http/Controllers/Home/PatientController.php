@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Appointment;
+use App\DateOfWork;
 use App\Http\Controllers\Controller;
 use App\Type;
 use App\User;
@@ -16,7 +17,9 @@ class PatientController extends Controller
     {
             $types=Type::all();
             $doctors=User::whereRole('doctor')->get();
-            return view('home.appointment', compact('types', 'doctors'));
+            $dateOfWorks=DateOfWork::all();
+            // dd(json_encode(array_merge($dateOfWorks->pluck('dates')->toArray())));
+            return view('home.appointment', compact('types', 'doctors', 'dateOfWorks'));
 
     }
 

@@ -47,6 +47,7 @@
             height: 350px;
         }
     </style>
+    @yield('style')
 </head>
 
 <body>

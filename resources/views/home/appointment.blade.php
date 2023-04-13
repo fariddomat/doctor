@@ -1,5 +1,33 @@
 @extends('layouts.site')
 @section('title', 'Appointment')
+@section('style')
+    <!-- FullCalendar CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- jQuery and FullCalendar JS files -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+@endsection
+@push('scripts')
+    <script>
+        $(function() {
+            var availableDates = {!! json_encode($dateOfWorks->pluck('dates')->toArray()) !!};
+
+            $("#appointment_date").datepicker({
+                beforeShowDay: function(date) {
+                    var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [availableDates.includes(dateString)];
+                }
+            });
+        });
+    </script>
+@endpush
+
 @section('content')
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
@@ -58,12 +86,16 @@
 
                                 </div>
                             </div>
+
                             <div class="col-md-3 form-group mt-3">
-                                <input type="date" name="appointment_date" class="form-control datepicker" id="date"
-                                    placeholder="Appointment Date" data-rule="minlen:4"
-                                    data-msg="Please enter at least 4 chars">
-                                <div class="validate"></div>
+                                <select name="appointment_date">
+                                    @foreach ($dateOfWorks->flatMap->dates as $date)
+                                        <option value="{{ $date }}">{{ $date }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" name="appointment_date" id="appointment_date">
                             </div>
+
 
                             <div class="col-md-3 form-group mt-3">
                                 <input type="time" name="appointment_time" class="form-control datepicker" id="date"

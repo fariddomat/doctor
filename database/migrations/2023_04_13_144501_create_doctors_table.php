@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDdetailsTable extends Migration
+class CreateDoctorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDdetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ddetails', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('spec');
             $table->string('qout');
             $table->string('twitter')->nullable();
@@ -26,7 +26,7 @@ class CreateDdetailsTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
-            $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
@@ -38,6 +38,6 @@ class CreateDdetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ddetails');
+        Schema::dropIfExists('doctors');
     }
 }
