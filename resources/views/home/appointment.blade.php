@@ -1,6 +1,8 @@
 @extends('layouts.site')
 @section('title', 'Appointment')
 @section('style')
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- FullCalendar CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -15,14 +17,30 @@
 @endsection
 @push('scripts')
     <script>
-        $(function() {
-            var availableDates = {!! json_encode($dayOfWorks->pluck('dates')->toArray()) !!};
-
-            $("#appointment_date").datepicker({
-                beforeShowDay: function(date) {
-                    var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [availableDates.includes(dateString)];
-                }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            $('#appointment_date').on('change', function(e) {
+                var appointment_date = e.target.value;
+                $.ajax({
+                    url: "{{ route('appointment.time') }}",
+                    type: "POST",
+                    data: {
+                        appointment_date: appointment_date
+                    },
+                    success: function(data) {
+                        $('#appointment_time').empty();
+                        $.each(data.time, function(index,
+                            t) {
+                            $('#appointment_time').append('<option value="' +
+                                t
+                                .id + '">' + t.time + '</option>');
+                        })
+                    }
+                })
             });
         });
     </script>
@@ -88,23 +106,17 @@
                             </div>
 
                             <div class="col-md-3 form-group mt-3">
-                                <select name="appointment_date">
-                                    @foreach ($dayOfWorks->flatMap->dates as $date)
-                                        <option value="{{ $date }}">{{ $date }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="text" name="appointment_date" id="appointment_date">
-                            </div>
-
-
-                            <div class="col-md-3 form-group mt-3">
-                                <input type="time" name="appointment_time" class="form-control datepicker" id="date"
-                                    placeholder="Appointment Time" data-rule="minlen:4"
+                                <input type="date" id="appointment_date" name="appointment_date" class="form-control datepicker" id="date"
+                                    placeholder="Appointment Date" data-rule="minlen:4"
                                     data-msg="Please enter at least 4 chars">
                                 <div class="validate"></div>
                             </div>
-                        </div>
 
+                            <div class="col-md-3 form-group mt-3">
+                                <select name="appointment_time" id="appointment_time" class="form-control"></select>
+                                <div class="validate"></div>
+                            </div>
+                        </div>
                         <div class="form-group mt-3">
                             <textarea class="form-control" name="user_message" rows="5" placeholder="Message (Optional)"></textarea>
                             <div class="validate"></div>

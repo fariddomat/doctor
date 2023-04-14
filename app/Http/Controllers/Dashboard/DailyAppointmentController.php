@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DailyAppointment;
 use App\DayOfWork;
 use App\Http\Controllers\Controller;
 use App\SettingLog;
 use App\User;
 use Illuminate\Http\Request;
 
-class DayOfWorkController extends Controller
+class DailyAppointmentController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +22,7 @@ class DayOfWorkController extends Controller
      */
     public function index()
     {
-        $dayOfWorks=DayOfWork::all();
-        return view('dashboard.dayOfWorks.index', compact('dayOfWorks'));
+
     }
 
     /**
@@ -30,9 +30,11 @@ class DayOfWorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('dashboard.dayOfWorks.create');
+        $dayOfWork=DayOfWork::findOrFail($request->id);
+        $dailyAppointment=DailyAppointment::where('day_of_work_id', $dayOfWork->id)->get();
+        return view('dashboard.dailyAppointments.create', compact('dayOfWork', 'dailyAppointment'));
     }
 
     /**
@@ -43,14 +45,25 @@ class DayOfWorkController extends Controller
      */
     public function store(Request $request)
     {
+
+        $dayOfWork=DayOfWork::findOrFail($request->id);
         $request->validate([
-            'day'=>'required'
+            'id'=>'required',
+            'from'=>'required',
+            'to'=>'required',
         ]);
-        $dayOfWork=DayOfWork::create($request->all());
-        SettingLog::log('success', auth()->id(), 'Add New Day Of Work', route('dashboard.dayOfWorks.edit', $dayOfWork->id));
+        // dd(date('g:i',strtotime($request->from)));
+        for ($i=strtotime($request->from); $i <= strtotime($request->to);  $i+=1800 ) {
+            DailyAppointment::create([
+                'day_of_work_id'=> $request->id,
+                'time'=> date('g:i', $i),
+            ]);
+        }
+
+        SettingLog::log('success', auth()->id(), 'Add New Daily Appointment', route('dashboard.dailyAppointments.edit', $dayOfWork->id));
 
         session()->flash('success', 'Created Successfully !');
-        return redirect()->route('dashboard.dayOfWorks.index');
+        return redirect()->back();
     }
 
     /**
@@ -71,10 +84,7 @@ class DayOfWorkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $dayOfWork=DayOfWork::findOrFail($id);
-        return view('dashboard.dayOfWorks.edit', compact('dayOfWork', 'doctors'));
-    }
+    {}
 
     /**
      * Update the specified resource in storage.
@@ -85,15 +95,6 @@ class DayOfWorkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'day'=>'required',
-        ]);
-        $dayOfWork=DayOfWork::findOrFail($id);
-        $dayOfWork->update($request->all());
-
-        SettingLog::log('warning', auth()->id(), 'Update Day Of Work', route('dashboard.dayOfWorks.edit', $dayOfWork->id));
-        session()->flash('success', 'Updated Successfully !');
-        return redirect()->route('dashboard.dayOfWorks.index');
     }
 
     /**
@@ -104,11 +105,11 @@ class DayOfWorkController extends Controller
      */
     public function destroy($id)
     {
-        $dayOfWork=DayOfWork::findOrFail($id);
-        $dayOfWork->delete();
+        $dailyAppointment=DailyAppointment::findOrFail($id);
+        $dailyAppointment->delete();
 
-        SettingLog::log('danger', auth()->id(), 'Delete Day Of Work Start : '.$dayOfWork->start.' - End : '.$dayOfWork->end,null);
+        SettingLog::log('danger', auth()->id(), 'Delete Day Of Work Start : '.$dailyAppointment->start.' - End : '.$dailyAppointment->end,null);
         session()->flash('success', 'Deleted Successfully !');
-        return redirect()->route('dashboard.dayOfWorks.index');
+        return redirect()->back();
     }
 }

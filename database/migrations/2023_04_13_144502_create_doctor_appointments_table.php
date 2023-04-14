@@ -18,7 +18,7 @@ class CreateDoctorAppointmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('day_of_work_id');
             $table->unsignedBigInteger('doctor_id');
-            $table->text('status');
+            $table->text('status')->nullable();
             $table->timestamps();
             $table->foreign('day_of_work_id')->references('id')->on('day_of_works')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');

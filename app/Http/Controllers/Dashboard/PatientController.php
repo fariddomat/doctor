@@ -18,7 +18,7 @@ class PatientController extends Controller
         $users=User::whereRole(['user'])
             ->whenSearch(request()->search)
             ->whenRole(request()->role_id)
-            ->with('appointments')
+            ->with('patient')
             ->paginate(5);
         return view('dashboard.patients.index',compact('users'));
     }

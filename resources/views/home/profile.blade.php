@@ -120,7 +120,7 @@
                                             <i class="fa fa-align-justify"></i> Appointment
                                         </div>
                                     <div class="card-block table-responsive">
-                                        @if ($user->appointments->count() > 0)
+                                        @if ($user->patient->appointments->count() > 0)
                                         <table id="dataTable" class="table table-striped display responsive nowrap">
                                             <thead>
                                                 <tr>
@@ -134,7 +134,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($user->appointments as $index => $appointment)
+                                                @foreach ($user->patient->appointments as $index => $appointment)
                                                     <tr>
                                                         <td>{{ $index + 1 }}</td>
                                                         <td>{{ $appointment->appointment_date }}</td>

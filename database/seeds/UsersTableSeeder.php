@@ -1,5 +1,6 @@
 <?php
 
+use App\Patient;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -32,6 +33,9 @@ class UsersTableSeeder extends Seeder
             'password'=>bcrypt('user'),
         ]);
         $user2->attachRole('user');
+        Patient::create([
+            'user_id'=>$user2->id
+        ]);
 
 
         $user3=User::create([

@@ -21,6 +21,7 @@ Route::prefix('dashboard')
 
         Route::resource('types', 'TypeController');
         Route::resource('dayOfWorks', 'DayOfWorkController');
+        Route::resource('dailyAppointments', 'DailyAppointmentController');
         Route::resource('appointments', 'AppointmentController');
         Route::resource('treatments', 'TreatmentController');
         Route::resource('patients', 'PatientController');

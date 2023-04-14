@@ -16,7 +16,7 @@ class CreateDayOfWorksTable extends Migration
         Schema::create('day_of_works', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->date('day');
+            $table->string('day');
             $table->timestamps();
         });
     }

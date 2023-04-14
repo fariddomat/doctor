@@ -40,6 +40,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Day</th>
+                                            <th>Time</th>
                                             <th>Action</th>
 
 
@@ -50,7 +51,13 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $dayOfWork->day }}</td>
+                                                <td>
 
+                                                    <a href="{{ route('dashboard.dailyAppointments.create', ['id'=>$dayOfWork->id]) }}"
+                                                        class="btn btn-outline-primary" style="display: inline-block"><i
+                                                            class="fa fa-clock"></i> Set</a>
+
+                                                </td>
                                                 <td>
 
                                                     <a href="{{ route('dashboard.dayOfWorks.edit', $dayOfWork->id) }}"
@@ -77,7 +84,6 @@
                                     </tbody>
                                 </table>
 
-                                <div class="text-center m-auto">{{ $dayOfWorks->appends(request()->query())->links() }}</div>
                             @else
                                 <h3 style="font-weight: 400">Sorry no record found !</h3>
                             @endif

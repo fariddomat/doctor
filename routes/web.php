@@ -36,6 +36,8 @@ Auth::routes();
 Route::middleware(['auth'])
     ->group(function () {
         Route::get('appointment', 'Home\PatientController@appointment')->name('appointment');
+
+    Route::post('/appointment/time', 'Home\PatientController@appointmentTime')->name('appointment.time');
         Route::post('postAppointment', 'Home\PatientController@postAppointment')->name('postAppointment');
         Route::get('profile', 'Home\PatientController@profile')->name('profile');
         Route::post('updateProfile', 'Home\PatientController@updateProfile')->name('updateProfile');

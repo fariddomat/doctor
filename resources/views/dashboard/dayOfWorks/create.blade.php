@@ -16,8 +16,8 @@
 
 
                     <div class="form-group">
-                        <label for="name">Date</label>
-                        <input type="date" class="form-control" name="day" id="day" value="{{ old('day') }}"
+                        <label for="name">Day</label>
+                        <input type="text" class="form-control" name="day" id="day" value="{{ old('day') }}"
                             aria-describedby="helpId" placeholder="">
                     </div>
 
