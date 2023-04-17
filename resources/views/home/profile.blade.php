@@ -130,7 +130,8 @@
                                                     <th class="none">Type</th>
                                                     <th class="none">User Message</th>
                                                     <th class="none">Doctor Report</th>
-                                                    <th class="none">Price</th>
+                                                    <th class="none">Fee</th>
+                                                    <th class="none">Un Paid Fee</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -141,8 +142,9 @@
                                                         <td>{{ $appointment->appointment_time }}</td>
                                                         <td>{{ $appointment->type->name }}</td>
                                                         <td>{{ $appointment->user_message }}</td>
-                                                        <td>{{ $appointment->docotr_report }}</td>
-                                                        <td>{{ $appointment->price }}</td>
+                                                        <td>{{ $appointment->treatment->report }}</td>
+                                                        <td>{{ $appointment->treatment->fee }}</td>
+                                                        <td>{{ $appointment->treatment->unpaid_amount }}</td>
 
                                                     </tr>
                                                 @endforeach

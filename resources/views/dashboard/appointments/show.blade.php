@@ -11,7 +11,7 @@
             <div class="card-block ">
                 <div class="form-group row">
                     <label for="name" class="col-md-4">Patient : </label>
-                    <label for="name" class="col-md-4">{{ $appointment->user->name }}</label>
+                    <label for="name" class="col-md-4">{{ $appointment->patient->user->name }}</label>
 
                 </div>
                 <div class="form-group row">

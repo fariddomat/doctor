@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="name">Patient Name : </label>
-                        <label for="name">{{ $appointment->user->name }}</label>
+                        <label for="name">{{ $appointment->patient->user->name }}</label>
                     </div>
 
                     <div class="form-group">

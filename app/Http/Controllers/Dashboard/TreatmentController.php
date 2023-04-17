@@ -69,7 +69,7 @@ class TreatmentController extends Controller
             ]);
         }
 
-        SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
+        SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Updated Successfully !');
         return redirect()->route('dashboard.treatments.index');
 

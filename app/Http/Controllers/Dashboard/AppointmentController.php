@@ -24,7 +24,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::whenUser(request()->id)->with(['user', 'type'])->paginate(5);
+        $appointments = Appointment::whenUser(request()->id)->with(['patient', 'type'])->paginate(5);
         return view('dashboard.appointments.index', compact('appointments'));
     }
 
@@ -133,7 +133,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $appointment->delete();
 
-        SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->user_id)->name, route('dashboard.appointments.show', $appointment->id));
+        SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.appointments.index');
     }

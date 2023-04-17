@@ -59,8 +59,8 @@
                             @foreach ($appointments as $index => $appointment)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $appointment->doctor->name }}</td>
-                                    <td>{{ $appointment->user->name }}</td>
+                                    <td>{{ $appointment->doctor_appointment->doctor->user->name }}</td>
+                                    <td>{{ $appointment->patient->user->name }}</td>
                                     <td>{{ $appointment->type->name }}</td>
                                     <td>{{ $appointment->appointment_date }}</td>
                                     <td>{{ $appointment->appointment_time }}</td>
