@@ -12,4 +12,9 @@ class DoctorAppointment extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+
+    public function daily_appointment()
+    {
+        return $this->belongsTo(DailyAppointment::class);
+    }
 }

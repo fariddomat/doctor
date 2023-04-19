@@ -11,7 +11,12 @@ class Appointment extends Model
     public function scopeWhenUser($query,$id)
     {
         return $query->when($id,function($q) use ($id){
-            return $q->where('user_id',"$id");
+            return $q->whereHas('doctor_appointment',function($q2) use ($q,$id){
+                return $q2->whereHas('doctor',function($q3) use ($q2,$id){
+                    return $q3->where('user_id',$id);
+                });
+
+            });
         });
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.site')
 @section('title', 'Appointment')
 @section('style')
-
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- FullCalendar CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
@@ -33,12 +32,17 @@
                     },
                     success: function(data) {
                         $('#appointment_time').empty();
+                        var i=0;
                         $.each(data.time, function(index,
                             t) {
+                                i++;
                             $('#appointment_time').append('<option value="' +
                                 t
                                 .id + '">' + t.time + '</option>');
                         })
+                        if (i == 0) {
+                            $('#appointment_time').append('<option>No Times available</option>');
+                        }
                     }
                 })
             });
@@ -113,7 +117,9 @@
                             </div>
 
                             <div class="col-md-3 form-group mt-3">
-                                <select name="appointment_time" id="appointment_time" class="form-control"></select>
+                                <select name="appointment_time"  id="appointment_time"   class="form-control">
+                                    <option value="">Please select date</option>
+                                </select>
                                 <div class="validate"></div>
                             </div>
                         </div>

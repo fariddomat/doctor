@@ -8,6 +8,7 @@ use App\DayOfWork;
 use App\Doctor;
 use App\DoctorAppointment;
 use App\Http\Controllers\Controller;
+use App\Patient;
 use App\Type;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,9 +35,9 @@ class PatientController extends Controller
         $d    = new DateTime($date);
         $d->format('l');  //pass l for lion aphabet in format
         // dd($d->format('l'));
-        $day=DayOfWork::where('day',$d->format('l'))->first();
+        $day = DayOfWork::where('day', $d->format('l'))->first();
         // dd($day);
-        $time=DailyAppointment::where('day_of_work_id',$day->id)->get();
+        $time = DailyAppointment::where('day_of_work_id', $day->id)->get();
         return response()->json([
             'time' => $time
         ]);
@@ -47,7 +48,7 @@ class PatientController extends Controller
         $request->validate([
             'user_id' => 'required',
             'doctor_id' => 'required',
-            'type_id'=>'required',
+            'type_id' => 'required',
             'appointment_time' => 'required',
             'appointment_date' => 'required',
         ]);
@@ -56,22 +57,30 @@ class PatientController extends Controller
         $d    = new DateTime($date);
         $d->format('l');  //pass l for lion aphabet in format
         // dd($d->format('l'));
-        $day=DayOfWork::where('day',$d->format('l'))->first();
-
-        $doctor=Doctor::where('user_id',$request->doctor_id)->firstOrFail();
-
-        $doctorAppointment=DoctorAppointment::create([
-            'doctor_id' =>$doctor->id,
-            'day_of_work_id'=>$day->id,
+        $day = DayOfWork::where('day', $d->format('l'))->first();
+        $time = DailyAppointment::findOrFail($request->appointment_time);
+        $doctor = Doctor::where('user_id', $request->doctor_id)->firstOrFail();
+        $d_a = DoctorAppointment::where('doctor_id', $doctor->id)->where('daily_appointment_id', $time->id)->count();
+        if ($d_a > 0) {
+            $a = Appointment::where('appointment_time', $time->time)->where('appointment_date', $request->appointment_date)->count();
+            if ($a > 0) {
+                return redirect()->back()->withErrors([
+                    'msg' => 'This appointment is already taken'
+                ]);
+            }
+        }
+        $doctorAppointment = DoctorAppointment::create([
+            'doctor_id' => $doctor->id,
+            'daily_appointment_id' => $time->id,
         ]);
 
         Appointment::create([
-            'doctor_appointment_id'=>$doctorAppointment->id,
-            'patient_id'=>auth()->user()->patient->id,
-            'type_id'=>$request->type_id,
-            'appointment_time'=>$request->appointment_time,
-            'appointment_date'=>$request->appointment_date,
-            'user_message'=>$request->user_message,
+            'doctor_appointment_id' => $doctorAppointment->id,
+            'patient_id' => auth()->user()->patient->id,
+            'type_id' => $request->type_id,
+            'appointment_time' => $time->time,
+            'appointment_date' => $request->appointment_date,
+            'user_message' => $request->user_message,
         ]);
         session()->flash('success', 'Make appointment successfully');
         return redirect()->route('home');

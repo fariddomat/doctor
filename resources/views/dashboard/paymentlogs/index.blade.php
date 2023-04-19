@@ -53,8 +53,8 @@
                             @foreach ($paymentlogs as $index => $paymentlog)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $paymentlog->treatment->appointment->doctor->name }}</td>
-                                    <td>{{ $paymentlog->treatment->appointment->user->name }}</td>
+                                    <td>{{ $paymentlog->treatment->appointment->doctor_appointment->doctor->user->name }}</td>
+                                    <td>{{ $paymentlog->treatment->appointment->patient->user->name }}</td>
                                     <td>{{ $paymentlog->treatment->fee }}</td>
                                     <td>{{ $paymentlog->amount }}</td>
                                     <td>{{ $paymentlog->created_at->diffForHumans() }}</td>

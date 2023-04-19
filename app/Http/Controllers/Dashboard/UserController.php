@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Patient;
 use App\SettingLog;
 use App\User;
 use Session;
@@ -61,6 +63,18 @@ class UserController extends Controller
         $request->merge(['password' => bcrypt($request->password)]);
         $user = User::create($request->all());
         $user->attachRoles([$request->role_id]);
+        if($request->role_id == 2){
+            Doctor::create([
+                'user_id' => $user->id,
+                'spec' => 'spec',
+                'qout' => 'qout',
+                'img'  => 'img'
+            ]);
+        }elseif ($request->role_id == 4) {
+            Patient::create([
+                'user_id' => $user->id
+            ]);
+        }
         SettingLog::log('success', auth()->id(), 'Add New User : ' . $user->name, route('dashboard.users.edit', $user->id));
 
         session()->flash('success', 'Successfully Created !');
@@ -107,7 +121,30 @@ class UserController extends Controller
             'role_id' => 'required|numeric',
         ]);
         $user = User::findOrFail($id);
+        $oldRole=$user->roles->first()->id;
+        // dd($oldRole);
 
+        if ($oldRole != $request->role_id) {
+            if($oldRole == 2){
+                $doctor=Doctor::findOrFail($user->doctor->id);
+                $doctor->delete();
+            }elseif ($oldRole == 4) {
+                $patient=Patient::findOrFail($user->patient->id);
+                $patient->delete();
+            }
+            if($request->role_id == 2){
+                Doctor::create([
+                    'user_id' => $user->id,
+                    'spec' => 'spec',
+                    'qout' => 'qout',
+                    'img'  => 'img'
+                ]);
+            }elseif ($request->role_id == 4) {
+                Patient::create([
+                    'user_id' => $user->id
+                ]);
+            }
+        }
         $user->update($request->all());
         $user->syncRoles([$request->role_id]);
 

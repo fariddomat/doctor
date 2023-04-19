@@ -16,11 +16,11 @@ class CreateDoctorAppointmentsTable extends Migration
         Schema::create('doctor_appointments', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('day_of_work_id');
+            $table->unsignedBigInteger('daily_appointment_id');
             $table->unsignedBigInteger('doctor_id');
             $table->text('status')->nullable();
             $table->timestamps();
-            $table->foreign('day_of_work_id')->references('id')->on('day_of_works')->onDelete('cascade');
+            $table->foreign('daily_appointment_id')->references('id')->on('daily_appointments')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
 
         });
