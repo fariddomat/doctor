@@ -119,41 +119,50 @@
                                         <div class="card-header">
                                             <i class="fa fa-align-justify"></i> Appointment
                                         </div>
-                                    <div class="card-block table-responsive">
-                                        @if ($user->patient->appointments->count() > 0)
-                                        <table id="dataTable" class="table table-striped display responsive nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th class="none">Type</th>
-                                                    <th class="none">User Message</th>
-                                                    <th class="none">Doctor Report</th>
-                                                    <th class="none">Fee</th>
-                                                    <th class="none">Un Paid Fee</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($user->patient->appointments as $index => $appointment)
-                                                    <tr>
-                                                        <td>{{ $index + 1 }}</td>
-                                                        <td>{{ $appointment->appointment_date }}</td>
-                                                        <td>{{ $appointment->appointment_time }}</td>
-                                                        <td>{{ $appointment->type->name }}</td>
-                                                        <td>{{ $appointment->user_message }}</td>
-                                                        <td>{{ $appointment->treatment->report }}</td>
-                                                        <td>{{ $appointment->treatment->fee }}</td>
-                                                        <td>{{ $appointment->treatment->unpaid_amount }}</td>
+                                        <div class="card-block table-responsive">
+                                            @if ($user->patient->appointments->count() > 0)
+                                                <table id="dataTable"
+                                                    class="table table-striped display responsive nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Date</th>
+                                                            <th>Time</th>
+                                                            <th class="none">Type</th>
+                                                            <th class="none">User Message</th>
+                                                            <th class="none">Doctor Report</th>
+                                                            <th class="none">Fee</th>
+                                                            <th class="none">Un Paid Fee</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($user->patient->appointments as $index => $appointment)
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $appointment->appointment_date }}</td>
+                                                                <td>{{ $appointment->appointment_time }}</td>
+                                                                <td>{{ $appointment->type->name }}</td>
+                                                                <td>{{ $appointment->user_message }}</td>
 
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        @else
-                                            <h3 style="font-weight: 400">Sorry no record found !</h3>
-                                        @endif
-                                    </div>
+                                                                @if ($appointment->treatment)
+                                                                    <td>
+                                                                        {{ $appointment->treatment->report }}</td>
+
+                                                                    <td>{{ $appointment->treatment->fee }}</td>
+                                                                    <td>{{ $appointment->treatment->unpaid_amount }}</td>
+                                                                @else
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                @endif
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <h3 style="font-weight: 400">Sorry no record found !</h3>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>

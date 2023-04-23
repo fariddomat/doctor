@@ -52,7 +52,16 @@
                     @csrf
                     @method('post')
                     @include('dashboard.layouts._error')
-
+                    @if (!Auth::user()->hasRole('doctor'))
+                    <div class="form-group">
+                        <label for="name">Doctor</label>
+                        <select name="doctor_id" id="" class="form-control">
+                            @foreach ($doctors as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
 
                     <div class="form-group">
                         <label for="name">Patient</label>

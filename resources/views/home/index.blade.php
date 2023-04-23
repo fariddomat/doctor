@@ -177,35 +177,35 @@
                 <div class="row">
 
                     @foreach ($doctors as $doctor)
-                        @if ($doctor->ddetail)
+                        @if ($doctor->doctor)
                         <div class="col-lg-6 mt-4 mt-lg-0">
                             <div class="member d-flex align-items-start">
-                                <div class="pic"><img src="{{ asset('storage/images/' . $doctor->ddetail->img) }}"
+                                <div class="pic"><img src="{{ asset('storage/images/' . $doctor->doctor->img) }}"
                                         class="img-fluid" alt=""></div>
                                 <div class="member-info">
                                     <h4>{{ $doctor->name }}</h4>
-                                    <span>{{ $doctor->ddetail->spec }}</span>
-                                    <p>{{ $doctor->ddetail->qout }}</p>
+                                    <span>{{ $doctor->doctor->spec }}</span>
+                                    <p>{{ $doctor->doctor->qout }}</p>
                                     <div class="social">
-                                        @if ($doctor->ddetail->twitter)
+                                        @if ($doctor->doctor->twitter)
 
-                                        <a href="{{ $doctor->ddetail->twitter }}"><i class="ri-twitter-fill"></i></a>
+                                        <a href="{{ $doctor->doctor->twitter }}"><i class="ri-twitter-fill"></i></a>
                                         @endif
-                                        @if ($doctor->ddetail->facebook)
+                                        @if ($doctor->doctor->facebook)
 
-                                        <a href="{{ $doctor->ddetail->facebook }}"><i class="ri-facebook-fill"></i></a>
+                                        <a href="{{ $doctor->doctor->facebook }}"><i class="ri-facebook-fill"></i></a>
                                         @endif
-                                        @if ($doctor->ddetail->instagram)
+                                        @if ($doctor->doctor->instagram)
 
-                                        <a href="{{ $doctor->ddetail->instagram }}"><i class="ri-instagram-fill"></i></a>
+                                        <a href="{{ $doctor->doctor->instagram }}"><i class="ri-instagram-fill"></i></a>
                                         @endif
-                                        @if ($doctor->ddetail->linkedIn)
+                                        @if ($doctor->doctor->linkedIn)
 
-                                        <a href="{{ $doctor->ddetail->linkedIn }}"> <i class="ri-linkedin-box-fill"></i> </a>
+                                        <a href="{{ $doctor->doctor->linkedIn }}"> <i class="ri-linkedin-box-fill"></i> </a>
                                         @endif
-                                        @if ($doctor->ddetail->whatsapp)
+                                        @if ($doctor->doctor->whatsapp)
 
-                                        <a href="{{ $doctor->ddetail->whatsapp }}"> <i class="ri-whatsapp-fill"></i> </a>
+                                        <a href="{{ $doctor->doctor->whatsapp }}"> <i class="ri-whatsapp-fill"></i> </a>
                                         @endif
                                     </div>
                                 </div>

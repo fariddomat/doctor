@@ -104,7 +104,7 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $doctor = Doctor::findOrFail($id);
+        $doctor = Doctor::where('user_id', $id)->firstOrFail();
         $request->validate([
             'spec' => 'required',
             'qout' => 'required',

@@ -52,6 +52,18 @@
                     @csrf
                     @method('put')
                     @include('dashboard.layouts._error')
+                    @if (!Auth::user()->hasRole('doctor'))
+                    <div class="form-group">
+                        <label for="name">Doctor</label>
+                        <select name="doctor_id" id="" class="form-control">
+                            @foreach ($doctors as $user)
+                            <option value="{{ $user->id }}" @if ($appointment->doctor_appointment->doctor->user_id == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
 
 
 

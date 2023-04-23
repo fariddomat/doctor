@@ -30,7 +30,13 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::whenUser(auth()->id())->with(['patient', 'type'])->paginate(5);
+        if (auth()->user()->hasRole('doctor')) {
+
+            $appointments = Appointment::whenUser(auth()->id())->with(['patient', 'type'])->paginate(5);
+        } else {
+
+            $appointments = Appointment::with(['patient', 'type'])->paginate(5);
+        }
         return view('dashboard.appointments.index', compact('appointments'));
     }
 
@@ -42,8 +48,9 @@ class AppointmentController extends Controller
     public function create()
     {
         $users = User::whereRole('user')->get();
+        $doctors = User::whereRole('doctor')->get();
         $types = Type::all();
-        return view('dashboard.appointments.create', compact('users', 'types'));
+        return view('dashboard.appointments.create', compact('users', 'doctors', 'types'));
     }
 
     /**
@@ -68,7 +75,11 @@ class AppointmentController extends Controller
         $day = DayOfWork::where('day', $d->format('l'))->first();
         $time = DailyAppointment::findOrFail($request->appointment_time);
         // dd($time);
-        $doctor = Doctor::where('user_id', auth()->id())->firstOrFail();
+        if (auth()->user()->hasRole('doctor')) {
+            $doctor = Doctor::where('user_id', auth()->id())->firstOrFail();
+        } else {
+            $doctor = Doctor::where('user_id', $request->doctor_id)->firstOrFail();
+        }
 
         $d_a = DoctorAppointment::where('doctor_id', $doctor->id)->where('daily_appointment_id', $time->id)->count();
         if ($d_a > 0) {
@@ -126,8 +137,9 @@ class AppointmentController extends Controller
     {
         $appointment = Appointment::findOrFail($id);
         $users = User::whereRole('user')->get();
+        $doctors = User::whereRole('doctor')->get();
         $types = Type::all();
-        return view('dashboard.appointments.edit', compact('appointment', 'users', 'types'));
+        return view('dashboard.appointments.edit', compact('appointment', 'users', 'doctors', 'types'));
     }
 
     /**
@@ -153,9 +165,14 @@ class AppointmentController extends Controller
 
         $day = DayOfWork::where('day', $d->format('l'))->first();
         $time = DailyAppointment::findOrFail($request->appointment_time);
-        $doctor = Doctor::where('user_id', auth()->id())->firstOrFail();
+        $doctor = null;
+        if (auth()->user()->hasRole('doctor')) {
+            $doctor = Doctor::where('user_id', auth()->id())->firstOrFail();
+        } else {
+            $doctor = Doctor::where('user_id', $request->doctor_id)->firstOrFail();
+        }
 
-        // dd($appointment->doctor_appointment->daily_appointment_id);
+
         if (
             $doctor->id != $appointment->doctor_appointment->doctor_id
             || $time->time != $appointment->appointment_time || $request->appointment_date != $appointment->appointment_date
@@ -206,6 +223,8 @@ class AppointmentController extends Controller
     public function destroy($id)
     {
         $appointment = Appointment::findOrFail($id);
+        $doctorAppointment=$appointment->doctor_appointment;
+        $doctorAppointment->delete();
         $appointment->delete();
 
         SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
