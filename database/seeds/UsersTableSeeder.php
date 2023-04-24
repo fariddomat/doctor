@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         $user0->attachRole('admin');
 
         $user=User::create([
-            'name'=>'Doctor',
+            'name'=>'Leen',
             'email'=>'doctor@d.com',
             'password'=>bcrypt('admin'),
         ]);
@@ -31,7 +31,20 @@ class UsersTableSeeder extends Seeder
             'user_id'=>$user->id,
             'spec'=>'spec',
             'qout'=>'qout',
-            'img'=>'img'
+            'img'=>'H9XbJ3ayHtT7082efDteEv1XCuHZYq1ePeTeYzZE.jpg'
+        ]);
+
+        $user4=User::create([
+            'name'=>'Ammar',
+            'email'=>'ammar@d.com',
+            'password'=>bcrypt('admin'),
+        ]);
+        $user4->attachRole('doctor');
+        Doctor::create([
+            'user_id'=>$user4->id,
+            'spec'=>'spec',
+            'qout'=>'qout',
+            'img'=>'CuZUrjpejXLo8QwpFZV9s4NwvUW8PkkGCNJpbFaV.jpg'
         ]);
 
         $user2=User::create([

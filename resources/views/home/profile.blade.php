@@ -126,6 +126,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
+                                                            <th>Doctor</th>
                                                             <th>Date</th>
                                                             <th>Time</th>
                                                             <th class="none">Type</th>
@@ -139,6 +140,7 @@
                                                         @foreach ($user->patient->appointments as $index => $appointment)
                                                             <tr>
                                                                 <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $appointment->doctor_appointment->doctor->user->name }}</td>
                                                                 <td>{{ $appointment->appointment_date }}</td>
                                                                 <td>{{ $appointment->appointment_time }}</td>
                                                                 <td>{{ $appointment->type->name }}</td>

@@ -89,6 +89,7 @@ class PatientController extends Controller
     public function profile()
     {
         $user = User::findOrFail(auth()->id());
+        // dd($user->id);
         return view('home.profile', compact('user'));
     }
 

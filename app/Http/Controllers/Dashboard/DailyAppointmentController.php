@@ -52,6 +52,7 @@ class DailyAppointmentController extends Controller
             'from'=>'required',
             'to'=>'required',
         ]);
+        dd($request->to);
         // dd(date('g:i',strtotime($request->from)));
         for ($i=strtotime($request->from); $i <= strtotime($request->to);  $i+=1800 ) {
             DailyAppointment::create([
