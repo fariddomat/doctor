@@ -31,7 +31,8 @@ class PatientController extends Controller
     {
 
 
-        $date = $request->appointment_date;
+        try {
+            $date = $request->appointment_date;
         $d    = new DateTime($date);
         $d->format('l');  //pass l for lion aphabet in format
         // dd($d->format('l'));
@@ -41,6 +42,11 @@ class PatientController extends Controller
         return response()->json([
             'time' => $time
         ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'time' => null
+            ]);
+        }
     }
 
     public function postAppointment(Request $request)
