@@ -29,8 +29,6 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        $doctors = User::whereRole('doctor')->doesntHave('doctor')->get();
-        return view('dashboard.doctors.create', compact('doctors'));
     }
 
     /**
@@ -41,34 +39,6 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'spec' => 'required',
-            'qout' => 'required',
-            // 'twitter' => 'required',
-            // 'facebook' => 'required',
-            // 'instagram' => 'required',
-            // 'linkedIn' => 'required',
-            // 'whatsapp' => 'required',
-            'img' => 'required|image',
-        ]);
-
-
-        $request_data = $request->except(['img']);
-
-
-        $img = Image::make($request->img)
-            ->resize(600, 600)
-            ->encode('jpg');
-
-        Storage::disk('local')->put('public/images/' . $request->img->hashName(), (string)$img, 'public');
-        $request_data['img'] = $request->img->hashName();
-
-
-        $doctor = Doctor::create($request_data);
-
-        session()->flash('success', 'Successfully Created !');
-        return redirect()->route('dashboard.users.index');
     }
 
     /**

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Appointment;
+use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Patient;
+use App\Type;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +19,11 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view('admin.index');
+        $doctors=Doctor::count();
+        $patients=Patient::count();
+        $types= Type::count();
+        $appointments= Appointment::count();
+        return view('dashboard.index', compact('doctors', 'patients', 'types' , 'appointments'));
     }
 
     public function profile()

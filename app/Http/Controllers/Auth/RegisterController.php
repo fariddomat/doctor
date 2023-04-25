@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Patient;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -71,6 +72,9 @@ class RegisterController extends Controller
         ]);
 
         $user->attachRole('user');
+        Patient::create([
+            'user_id' => $user->id
+        ]);
         return $user;
     }
 }

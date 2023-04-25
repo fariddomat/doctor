@@ -28,12 +28,15 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->user()->hasRole('doctor')) {
 
             $appointments = Appointment::whenUser(auth()->id())->with(['patient', 'type'])->paginate(5);
-        } else {
+        } elseif($request->id){
+
+            $appointments = Appointment::where('patient_id', $request->id)->with(['patient', 'type'])->paginate(5);
+        }else {
 
             $appointments = Appointment::with(['patient', 'type'])->paginate(5);
         }

@@ -8,9 +8,7 @@ Route::prefix('dashboard')
     ->middleware(['auth', 'role:admin|doctor|secr'])
     ->group(function () {
 
-        Route::get('home', function () {
-            return view('dashboard.layouts.site');
-        })->name('home');
+        Route::get('home', 'HomeController@index')->name('home');
 
         Route::resource('users', 'UserController');
         Route::post('ban/{id}', 'UserController@ban')->name('users.ban');

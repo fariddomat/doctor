@@ -31,8 +31,6 @@
                         Search</button>
                     <a href="{{ route('dashboard.users.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
                             aria-hidden="true"></i> Create</a>
-                    <a href="{{ route('dashboard.doctors.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
-                            aria-hidden="true"></i> Add Doctor Details</a>
 
                 </div>
             </div>

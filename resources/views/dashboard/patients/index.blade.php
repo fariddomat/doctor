@@ -56,7 +56,7 @@
                                                     @endif</td>
                                                 <td>
 
-                                                    <a href="{{ route('dashboard.patients.show', $user->id) }}"
+                                                    <a href="{{ route('dashboard.patients.show', $user->patient->id) }}"
                                                         class="btn btn-outline-success" style="display: inline-block"><i
                                                             class="fa fa-book"></i> Show</a>
 

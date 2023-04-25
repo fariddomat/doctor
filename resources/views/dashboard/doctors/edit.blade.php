@@ -21,7 +21,7 @@
 
 
                     <div class="form-group">
-                        <label for="doctor">Doctor : {{ $doctor->name }}</label>
+                        <label for="doctor">Doctor : {{ $doctor->user->name }}</label>
 
                     </div>
 
