@@ -18,6 +18,10 @@ use DateTime;
 
 class PatientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:user']);
+    }
 
     public function appointment()
     {

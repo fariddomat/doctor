@@ -14,7 +14,10 @@
                                     <i class="fa fa-user-md"></i>
                                 </button>
                             </div>
-                            <h4 class="m-b-0 m-l-2"> {{ $doctors }}</h4>
+                            <h4 class="m-b-0 m-l-2">
+                            {{ $doctors }}
+                          
+                            </h4>
                             <p>Doctors</p>
                         </div>
                         <div class="chart-wrapper p-x-1" style="height:70px;">

@@ -19,11 +19,12 @@ class HomeController extends Controller
     }
     public function index()
     {
+
         $doctors=Doctor::count();
         $patients=Patient::count();
         $types= Type::count();
         $appointments= Appointment::count();
-        return view('dashboard.index', compact('doctors', 'patients', 'types' , 'appointments'));
+        return view('dashboard.index', compact('doctors', 'patients', 'types' , 'appointments')); 
     }
 
     public function profile()

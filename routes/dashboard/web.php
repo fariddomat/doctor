@@ -9,7 +9,7 @@ Route::prefix('dashboard')
     ->group(function () {
 
         Route::get('home', 'HomeController@index')->name('home');
-
+ 
         Route::resource('users', 'UserController');
         Route::post('ban/{id}', 'UserController@ban')->name('users.ban');
         Route::post('unban/{id}', 'UserController@unban')->name('users.unban');

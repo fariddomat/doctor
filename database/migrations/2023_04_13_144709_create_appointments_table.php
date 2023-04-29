@@ -23,8 +23,6 @@ class CreateAppointmentsTable extends Migration
             $table->date('appointment_date');
             $table->string('user_message')->nullable();
 
-            // $table->string('docotr_report')->nullable();
-            // $table->integer('price')->nullable();
 
             $table->string('status')->default('pending');
 
