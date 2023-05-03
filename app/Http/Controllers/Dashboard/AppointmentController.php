@@ -234,4 +234,18 @@ class AppointmentController extends Controller
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.appointments.index');
     }
+
+    public function status(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'status' => 'required',
+        ]);
+        $appointment=Appointment::findOrFail($request->id);
+        $appointment->status = $request->status;
+        $appointment->save();
+        session()->flash('success', 'Status updated Successfully !');
+        return redirect()->back();
+    }
+
 }

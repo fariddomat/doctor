@@ -1,0 +1,17 @@
+MVC
+
+model
+App folder
+migrations [Database folder => migrations]
+
+view
+resources => views
+
+controller
+App => Http => controllers
+
+
+routing system
+routes folder
+    web.php [home, patient]
+    dashboard => web.php [controll panel, admin, doctor, sec]

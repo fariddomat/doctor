@@ -10,12 +10,13 @@ use App\SettingLog;
 use App\User;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:admin']);
+        $this->middleware(['role:admin|secr']);
     }
     /**
      * Display a listing of the resource.
@@ -24,14 +25,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        // dd(true);
-        $roles = Role::whereRoleNot(['admin'])->get();
+        if (Auth::user()->hasRole('admin')) {
 
-        $users = User::whereRoleNot(['admin'])
-            ->whenSearch(request()->search)
-            ->whenRole(request()->role_id)
-            ->with('roles')
-            ->paginate(5);
+            $roles = Role::whereRoleNot(['admin'])->get();
+
+            $users = User::whereRoleNot(['admin'])
+                ->whenSearch(request()->search)
+                ->whenRole(request()->role_id)
+                ->with('roles')
+                ->paginate(5);
+        } else {
+
+            $roles = Role::whereRole(['user'])->get();
+
+            $users = User::whereRole(['user'])
+                ->whenSearch(request()->search)
+                ->whenRole(request()->role_id)
+                ->with('roles')
+                ->paginate(5);
+        }
         return view('dashboard.users.index', compact('users', 'roles'));
     }
 
@@ -42,7 +54,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::whereRoleNot(['admin'])->get();
+        if (Auth::user()->hasRole('admin'))
+            $roles = Role::whereRoleNot(['admin'])->get();
+        else
+            $roles = Role::whereRole(['user'])->get();
+
         return view('dashboard.users.create', compact('roles'));
     }
 
@@ -63,14 +79,14 @@ class UserController extends Controller
         $request->merge(['password' => bcrypt($request->password)]);
         $user = User::create($request->all());
         $user->attachRoles([$request->role_id]);
-        if($request->role_id == 2){
+        if ($request->role_id == 2) {
             Doctor::create([
                 'user_id' => $user->id,
                 'spec' => 'spec',
                 'qout' => 'qout',
                 'img'  => 'img'
             ]);
-        }elseif ($request->role_id == 4) {
+        } elseif ($request->role_id == 4) {
             Patient::create([
                 'user_id' => $user->id
             ]);
@@ -100,7 +116,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::whereRoleNot(['admin'])->get();
+        if (Auth::user()->hasRole('admin'))
+            $roles = Role::whereRoleNot(['admin'])->get();
+        else
+            $roles = Role::whereRole(['user'])->get();
 
         $user = User::findOrFail($id);
         return view('dashboard.users.edit', compact('roles', 'user'));
@@ -121,25 +140,25 @@ class UserController extends Controller
             'role_id' => 'required|numeric',
         ]);
         $user = User::findOrFail($id);
-        $oldRole=$user->roles->first()->id;
+        $oldRole = $user->roles->first()->id;
         // dd($oldRole);
 
         if ($oldRole != $request->role_id) {
-            if($oldRole == 2){
-                $doctor=Doctor::findOrFail($user->doctor->id);
+            if ($oldRole == 2) {
+                $doctor = Doctor::findOrFail($user->doctor->id);
                 $doctor->delete();
-            }elseif ($oldRole == 4) {
-                $patient=Patient::findOrFail($user->patient->id);
+            } elseif ($oldRole == 4) {
+                $patient = Patient::findOrFail($user->patient->id);
                 $patient->delete();
             }
-            if($request->role_id == 2){
+            if ($request->role_id == 2) {
                 Doctor::create([
                     'user_id' => $user->id,
                     'spec' => 'spec',
                     'qout' => 'qout',
                     'img'  => 'img'
                 ]);
-            }elseif ($request->role_id == 4) {
+            } elseif ($request->role_id == 4) {
                 Patient::create([
                     'user_id' => $user->id
                 ]);
@@ -180,7 +199,7 @@ class UserController extends Controller
 
             SettingLog::log('info', auth()->id(), 'Banned User : ' . $user->name, route('dashboard.users.edit', $user->id));
             session()->flash('success', 'Successfully Ban !');
-            return redirect()->route('dashboard.users.index');
+            return redirect()->back();
         } else
             return response()->json(['message' => 'error'], 404);
     }
@@ -195,7 +214,7 @@ class UserController extends Controller
 
             SettingLog::log('info', auth()->id(), 'Un Bannde User : ' . $user->name, route('dashboard.users.edit', $user->id));
             session()->flash('success', 'Successfully unBan !');
-            return redirect()->route('dashboard.users.index');
+            return redirect()->back();
         } else
             return response()->json(['message' => 'error'], 404);
     }

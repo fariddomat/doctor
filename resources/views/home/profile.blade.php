@@ -129,6 +129,7 @@
                                                             <th>Doctor</th>
                                                             <th>Date</th>
                                                             <th>Time</th>
+                                                            <th>Status</th>
                                                             <th class="none">Type</th>
                                                             <th class="none">User Message</th>
                                                             <th class="none">Doctor Report</th>
@@ -143,6 +144,7 @@
                                                                 <td>{{ $appointment->doctor_appointment->doctor->user->name }}</td>
                                                                 <td>{{ $appointment->appointment_date }}</td>
                                                                 <td>{{ $appointment->appointment_time }}</td>
+                                                                <td>{{ $appointment->status }}</td>
                                                                 <td>{{ $appointment->type->name }}</td>
                                                                 <td>{{ $appointment->user_message }}</td>
 

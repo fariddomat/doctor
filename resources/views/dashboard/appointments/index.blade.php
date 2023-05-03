@@ -48,11 +48,13 @@
                                 <th>Doctor</th>
                                 <th>Patient</th>
                                 <th>Type</th>
+                                <th>Status</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Report</th>
-                                <th>Fee</th>
-                                <th>Action</th>
+                                <th class="none">Patient Message</th>
+                                <th class="none">Report</th>
+                                <th class="none">Fee</th>
+                                <th class="none">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,8 +64,10 @@
                                     <td>{{ $appointment->doctor_appointment->doctor->user->name }}</td>
                                     <td>{{ $appointment->patient->user->name }}</td>
                                     <td>{{ $appointment->type->name }}</td>
+                                    <td>{{ $appointment->status }}</td>
                                     <td>{{ $appointment->appointment_date }}</td>
                                     <td>{{ $appointment->appointment_time }}</td>
+                                    <td>{{ $appointment->user_message }}</td>
                                     <td>
                                         @if ($appointment->treatment)
                                             {{ $appointment->treatment->report }}
@@ -80,9 +84,19 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if ($appointment->status == 'pending')
+                                        <a href="{{ route('dashboard.appointments.status', ['id'=>$appointment->id, 'status'=>'accept']) }}"
+                                            class="btn btn-sm btn-outline-success" style="display: inline-block"><i
+                                                class="fa fa-check"></i> Accept</a>
+
+                                                <a href="{{ route('dashboard.appointments.status', ['id'=>$appointment->id, 'status'=>'reject']) }}"
+                                                    class="btn btn-sm btn-outline-danger" style="display: inline-block"><i
+                                                        class="fa fa-ban"></i> Reject</a>
+
+                                        @endif
 
                                         <a href="{{ route('dashboard.appointments.show', $appointment->id) }}"
-                                            class="btn btn-sm btn-outline-success" style="display: inline-block"><i
+                                            class="btn btn-sm btn-outline-primary" style="display: inline-block"><i
                                                 class="fa fa-book"></i> Report</a>
 
                                         <a href="{{ route('dashboard.appointments.edit', $appointment->id) }}"

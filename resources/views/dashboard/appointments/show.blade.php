@@ -97,10 +97,15 @@
                     </div>
                     @if (!$appointment->treatment)
                         @if (Auth::user()->hasRole('doctor'))
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Save</button>
-                            </div>
+                            @if ($appointment->status == 'accept')
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"
+                                            aria-hidden="true"></i>
+                                        Save</button>
+                                </div>
+                                @else
+                                Appointment {{ $appointment->status }}
+                            @endif
                         @endif
                     @endif
 

@@ -45,6 +45,8 @@ class TreatmentController extends Controller
             'report' => 'required',
             'fee' => 'required',
         ]);
+        $appointment->status='done';
+        $appointment->save();
         $amount=0;
         if($request->amount){
             $amount=$request->amount;
@@ -71,7 +73,7 @@ class TreatmentController extends Controller
 
         SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Updated Successfully !');
-        return redirect()->route('dashboard.treatments.index');
+        return redirect()->back();
 
     }
 

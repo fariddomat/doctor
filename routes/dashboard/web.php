@@ -9,7 +9,7 @@ Route::prefix('dashboard')
     ->group(function () {
 
         Route::get('home', 'HomeController@index')->name('home');
- 
+
         Route::resource('users', 'UserController');
         Route::post('ban/{id}', 'UserController@ban')->name('users.ban');
         Route::post('unban/{id}', 'UserController@unban')->name('users.unban');
@@ -20,6 +20,8 @@ Route::prefix('dashboard')
         Route::resource('types', 'TypeController');
         Route::resource('dayOfWorks', 'DayOfWorkController');
         Route::resource('dailyAppointments', 'DailyAppointmentController');
+        Route::get('/appointments/status', 'AppointmentController@status')->name('appointments.status');
+
         Route::resource('appointments', 'AppointmentController');
         Route::resource('treatments', 'TreatmentController');
         Route::resource('patients', 'PatientController');
@@ -40,6 +42,4 @@ Route::prefix('dashboard')
         Route::post('settings', 'SettingController@settings')->name('settings');
 
         Route::get('log', 'SettingController@log')->name('log');
-
-
     });

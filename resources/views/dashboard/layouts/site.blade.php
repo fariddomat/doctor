@@ -84,10 +84,13 @@
                         Users</a>
                 </li>
                 @endif
+                @if (Auth::user()->hasRole(['admin', 'doctor']))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.types.index') }}"><i class="icon-folder-alt "></i>
                         Types</a>
                 </li>
+
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.dayOfWorks.index') }}"><i class="icon-calendar"></i>
                         Day Of Work</a>
