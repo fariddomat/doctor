@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
+    use SoftDeletes ;
     protected $guarded=[];
 
     public function scopeWhenUser($query,$id)
@@ -20,6 +22,14 @@ class Appointment extends Model
         });
     }
 
+    public function scopeWhenStatus($query,$status)
+    {
+        return $query->when($status,function($q) use ($status){
+            return $q->where('status','like',"%$status%" );
+        });
+    }
+
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);
@@ -27,7 +37,7 @@ class Appointment extends Model
 
     public function doctor_appointment()
     {
-        return $this->belongsTo(DoctorAppointment::class);
+        return $this->belongsTo(DoctorAppointment::class)->withTrashed();
     }
 
     public function statuses()

@@ -9,6 +9,7 @@ use App\Doctor;
 use App\DoctorAppointment;
 use App\Http\Controllers\Controller;
 use App\Patient;
+use App\Status;
 use App\Type;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class PatientController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:user']);
+        $this->middleware(['role:user'])->except('appointmentTime');
     }
 
     public function appointment()
@@ -84,13 +85,18 @@ class PatientController extends Controller
             'daily_appointment_id' => $time->id,
         ]);
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'doctor_appointment_id' => $doctorAppointment->id,
             'patient_id' => auth()->user()->patient->id,
             'type_id' => $request->type_id,
             'appointment_time' => $time->time,
             'appointment_date' => $request->appointment_date,
             'user_message' => $request->user_message,
+        ]);
+
+        Status::create([
+            'appointment_id'=> $appointment->id,
+            'status'=> 'Pending Appointment',
         ]);
         session()->flash('success', 'Make appointment successfully');
         return redirect()->route('home');

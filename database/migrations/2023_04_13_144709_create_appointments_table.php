@@ -25,7 +25,7 @@ class CreateAppointmentsTable extends Migration
 
 
             $table->string('status')->default('pending');
-
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('doctor_appointment_id')->references('id')->on('doctor_appointments')->onDelete('cascade');

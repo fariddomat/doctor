@@ -6,6 +6,7 @@ use App\Appointment;
 use App\Http\Controllers\Controller;
 use App\Paymentlog;
 use App\SettingLog;
+use App\Status;
 use App\Treatment;
 use App\User;
 use Illuminate\Http\Request;
@@ -70,6 +71,12 @@ class TreatmentController extends Controller
                 'amount'=>$amount,
             ]);
         }
+
+
+        Status::create([
+            'appointment_id' => $appointment->id,
+            'status' => $appointment->status.' Appointment - by Doctor : '.auth()->user()->name
+        ]);
 
         SettingLog::log('primary', auth()->id(), 'Doctor Add Report - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Updated Successfully !');

@@ -20,6 +20,17 @@
                             value="{{ request()->search }}" aria-describedby="helpId" placeholder="search">
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="status" class="form-control" id="">
+                            <option value="">Select Status</option>
+                            <option value="pending" {{ request()->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="accept"  {{ request()->status == 'accept' ? 'selected' : '' }}>Accept</option>
+                            <option value="done"  {{ request()->status == 'done' ? 'selected' : '' }}>Done</option>
+                            <option value="reject"  {{ request()->status == 'reject' ? 'selected' : '' }}>Reject</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
@@ -55,6 +66,7 @@
                                 <th class="none">Report</th>
                                 <th class="none">Fee</th>
                                 <th class="none">Action</th>
+                                <th class="none">Status Log</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,7 +122,7 @@
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm btn-outline-danger delete"
                                                 style="display: inline-block"><i class="fa fa-trash" aria-hidden="true"></i>
-                                                Delete</button>
+                                                Cancel</button>
                                         </form>
 
                                         @if ($appointment->treatment)
@@ -119,6 +131,23 @@
                                                     class="btn btn-sm btn-outline-primary"> $ Pay</a>
                                             @endif
                                         @endif
+
+                                    </td>
+                                    <td>
+                                        <table class="mt-3">
+                                            @foreach ($appointment->statuses->reverse() as $status)
+                                            <tr>
+
+                                            <td>
+
+                                                <h5 class="mt-1">{{ $status->status }} </h5>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary bold">  {{ $status->created_at->diffForHumans() }}</span>
+                                            </td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
 
                                     </td>
                                 </tr>

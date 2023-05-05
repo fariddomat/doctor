@@ -11,6 +11,7 @@ use App\DoctorAppointment;
 use App\Http\Controllers\Controller;
 use App\Patient;
 use App\SettingLog;
+use App\Status;
 use App\Treatment;
 use App\Type;
 use App\User;
@@ -32,13 +33,13 @@ class AppointmentController extends Controller
     {
         if (auth()->user()->hasRole('doctor')) {
 
-            $appointments = Appointment::whenUser(auth()->id())->with(['patient', 'type'])->paginate(5);
-        } elseif($request->id){
+            $appointments = Appointment::whenStatus($request->status)->whenUser(auth()->id())->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
+        } elseif ($request->id) {
 
-            $appointments = Appointment::where('patient_id', $request->id)->with(['patient', 'type'])->paginate(5);
-        }else {
+            $appointments = Appointment::whenStatus($request->status)->where('patient_id', $request->id)->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
+        } else {
 
-            $appointments = Appointment::with(['patient', 'type'])->paginate(5);
+            $appointments = Appointment::whenStatus($request->status)->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
         }
         return view('dashboard.appointments.index', compact('appointments'));
     }
@@ -111,6 +112,11 @@ class AppointmentController extends Controller
             'appointment_time' => $time->time,
             'appointment_date' => $request->appointment_date,
             'user_message' => $request->user_message,
+        ]);
+
+        Status::create([
+            'appointment_id' => $appointment->id,
+            'status' => 'Pending Appointment - by : ' . auth()->user()->name
         ]);
         SettingLog::log('success', auth()->id(), 'New Appointment - Patient name : ' . User::find($request->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Created Successfully !');
@@ -189,6 +195,10 @@ class AppointmentController extends Controller
                     ]);
                 }
             }
+            Status::create([
+                'appointment_id' => $appointment->id,
+                'status' => 'Deffer Appointment - by : ' . auth()->user()->name
+            ]);
         }
 
         $doctorAppointment = DoctorAppointment::updateOrCreate([
@@ -226,10 +236,13 @@ class AppointmentController extends Controller
     public function destroy($id)
     {
         $appointment = Appointment::findOrFail($id);
-        $doctorAppointment=$appointment->doctor_appointment;
+        $doctorAppointment = $appointment->doctor_appointment;
         $doctorAppointment->delete();
         $appointment->delete();
-
+        Status::create([
+            'appointment_id' => $appointment->id,
+            'status' => 'Cancel Appointment - by : '.auth()->user()->name
+        ]);
         SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Deleted Successfully !');
         return redirect()->route('dashboard.appointments.index');
@@ -241,11 +254,16 @@ class AppointmentController extends Controller
             'id' => 'required',
             'status' => 'required',
         ]);
-        $appointment=Appointment::findOrFail($request->id);
+        $appointment = Appointment::findOrFail($request->id);
         $appointment->status = $request->status;
         $appointment->save();
+
+        Status::create([
+            'appointment_id' => $appointment->id,
+            'status' => $appointment->status . ' Appointment - by : ' . auth()->user()->name
+        ]);
+
         session()->flash('success', 'Status updated Successfully !');
         return redirect()->back();
     }
-
 }
