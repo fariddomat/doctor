@@ -25,6 +25,8 @@ Route::prefix('dashboard')
         Route::resource('appointments', 'AppointmentController');
         Route::resource('treatments', 'TreatmentController');
         Route::resource('patients', 'PatientController');
+        Route::post('patients/rank/{id}', 'PatientController@rank')->name('patients.rank');
+
         Route::resource('paymentlog', 'PaymentlogController');
         Route::resource('doctors', 'DoctorController');
 

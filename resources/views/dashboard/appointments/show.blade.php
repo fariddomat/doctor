@@ -12,7 +12,15 @@
                 <div class="form-group row">
                     <label for="name" class="col-md-4">Patient : </label>
                     <label for="name" class="col-md-4">{{ $appointment->patient->user->name }}</label>
+                </div>
 
+                <div class="form-group row">
+                    <label for="name" class="col-md-4">Patient Rank: </label>
+                    <label for="name" class="col-md-4">{{ $appointment->patient->rank }}
+                        @if ($appointment->patient->rank_details)
+
+                         - {{ $appointment->patient->rank_details }}
+                        @endif</label>
                 </div>
                 <div class="form-group row">
                     <label for="name" class="col-md-4">Type : </label>
@@ -29,6 +37,23 @@
                 <div class="form-group row">
                     <label for="" class="col-md-4">Message</label>
                     <label for="" class="col-md-4">{{ $appointment->user_message }}</label>
+                </div>
+
+                <hr>
+
+                <div class="form-group row">
+                    <label for="" class="col-md-4">Age</label>
+                    <label for="" class="col-md-4">{{ $appointment->patient->age }}</label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-md-4">Address</label>
+                    <label for="" class="col-md-4">{{ $appointment->patient->address }}</label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-md-4">Details</label>
+                    <label for="" class="col-md-4">{{ $appointment->patient->details }}</label>
                 </div>
             </div>
         </div>

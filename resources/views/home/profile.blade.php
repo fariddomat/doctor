@@ -132,6 +132,15 @@
                                         <input type="hidden" name="id" value="{{ $user->patient->id }}">
                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                                         <div class="row mb-3">
+                                            <label for="" class="col-lg-2">Your Rank</label>
+                                            <label for="" class="col-lg-8">{{ $user->patient->rank }}
+                                                @if ($user->patient->rank_details)
+
+                                                 - {{ $user->patient->rank_details }}
+                                                @endif</label>
+
+                                        </div>
+                                        <div class="row mb-3">
                                             <label for="" class="col-lg-2">Age</label>
                                             <div class="col-lg-8">
                                                 <input type="number" min="1" max="100"

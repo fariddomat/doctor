@@ -10,7 +10,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Create New User
+                <i class="fa fa-align-justify"></i> Edit Doctor Info
             </div>
             <div class="card-block ">
                 <form action="{{ route('dashboard.doctors.update' , $user->id) }}" method="POST" enctype="multipart/form-data">

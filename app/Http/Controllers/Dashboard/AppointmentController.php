@@ -262,6 +262,7 @@ class AppointmentController extends Controller
             'appointment_id' => $appointment->id,
             'status' => $appointment->status . ' Appointment - by : ' . auth()->user()->name
         ]);
+        SettingLog::log('warning', auth()->id(), $request->status.' Appointment - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
 
         session()->flash('success', 'Status updated Successfully !');
         return redirect()->back();

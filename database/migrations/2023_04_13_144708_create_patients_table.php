@@ -20,6 +20,8 @@ class CreatePatientsTable extends Migration
             $table->integer('age')->nullable();
             $table->string('address')->nullable();
             $table->string('details')->nullable();
+            $table->integer('rank')->default(5);
+            $table->string('rank_details')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

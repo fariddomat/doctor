@@ -88,10 +88,12 @@
                     @auth
                     @if (Auth::user()->hasRole(['admin', 'doctor','secr']))
                     <li><a class="nav-link scrollto" href="{{ route('dashboard.home') }}">Dashboard</a></li>
+                    @else
+                    <li><a class="nav-link scrollto" href="{{ route('profile') }}">Profile</a></li>
 
                     @endif
-                        <li><a class="nav-link scrollto" href="{{ route('profile') }}">Profile</a></li>
-                        <li>
+
+                    <li>
                             <a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
@@ -139,24 +141,8 @@
                     </div>
 
                     <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
                     </div>
-
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">1</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">2</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">3</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">4</a></li>
-                        </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">

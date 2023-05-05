@@ -115,6 +115,12 @@
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link" href="{{ route('dashboard.profile') }}"><i class="icon-user"></i> Profile</a>
                 </li>
+                @if (Auth::user()->hasRole('doctor'))
+
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link" href="{{ route('dashboard.doctors.edit', Auth::id()) }}"><i class="icon-info"></i> Info</a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                              onclick="event.preventDefault();

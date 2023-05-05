@@ -22,11 +22,14 @@ class PatientController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:user'])->except('appointmentTime');
+        $this->middleware(['role:user'])->except('appointmentTime', 'appointment');
     }
 
     public function appointment()
     {
+        if (Auth::user()->hasRole(['admin', 'doctor', 'secr'])) {
+            return redirect()->route('dashboard.appointments.create');
+        }
         $types = Type::all();
         $doctors = User::whereRole('doctor')->get();
         // dd(json_encode(array_merge($dayOfWorks->pluck('dates')->toArray())));
@@ -109,7 +112,7 @@ class PatientController extends Controller
     {
         $user = User::findOrFail(auth()->id());
         // dd($user->id);
-        $appointments=Appointment::where('patient_id', $user->patient->id)->latest()->withTrashed()->get();
+        $appointments = Appointment::where('patient_id', $user->patient->id)->latest()->withTrashed()->get();
         // dd($appointments->count());
         return view('home.profile', compact('user', 'appointments'));
     }
@@ -173,7 +176,7 @@ class PatientController extends Controller
 
         $day = DayOfWork::where('day', $d->format('l'))->first();
         $time = DailyAppointment::findOrFail($request->appointment_time);
-$doctor = Doctor::where('user_id', $appointment->doctor_appointment->doctor->user_id)->firstOrFail();
+        $doctor = Doctor::where('user_id', $appointment->doctor_appointment->doctor->user_id)->firstOrFail();
 
         // dd(true);
         if (
@@ -183,7 +186,7 @@ $doctor = Doctor::where('user_id', $appointment->doctor_appointment->doctor->use
             if ($d_a > 0) {
                 $a = Appointment::where('appointment_time', $time->time)->where('appointment_date', $request->appointment_date)->count();
                 if ($a > 0) {
-                    return redirect()->back()->withErrors([
+                    return redirect()->back()->withInputs()->withErrors([
                         'msg' => 'This appointment is already taken'
                     ]);
                 }
@@ -220,13 +223,13 @@ $doctor = Doctor::where('user_id', $appointment->doctor_appointment->doctor->use
     {
         $appointment = Appointment::findOrFail($id);
         $doctorAppointment = $appointment->doctor_appointment;
-        $appointment->status='cancel';
+        $appointment->status = 'cancel';
         $appointment->save();
         $doctorAppointment->delete();
         $appointment->delete();
         Status::create([
             'appointment_id' => $appointment->id,
-            'status' => 'Cancel Appointment - by : '.auth()->user()->name
+            'status' => 'Cancel Appointment - by : ' . auth()->user()->name
         ]);
         SettingLog::log('danger', auth()->id(), 'Delete Appointment - Patient name : ' . User::find($appointment->patient->user_id)->name, route('dashboard.appointments.show', $appointment->id));
         session()->flash('success', 'Deleted Successfully !');

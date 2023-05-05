@@ -113,7 +113,7 @@ class SettingController extends Controller
 
     public function log()
     {
-        $logs = SettingLog::orderBy('created_at', 'asc')->paginate(10);
+        $logs = SettingLog::latest()->paginate(10);
         return view('dashboard.settings.log', compact('logs'));
     }
 }

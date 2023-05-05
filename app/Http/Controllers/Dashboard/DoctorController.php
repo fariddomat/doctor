@@ -6,13 +6,14 @@ use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Session;
 
 class DoctorController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -60,6 +61,11 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
+        if (Auth::user()->hasRole('doctor')) {
+            if (Auth::id() != $id) {
+                abort(403);
+            }
+        }
         $user = User::findOrFail($id);
         $doctor = Doctor::where('user_id', $id)->first();
         return view('dashboard.doctors.edit', compact('user', 'doctor'));
@@ -99,6 +105,9 @@ class DoctorController extends Controller
         $doctor->update($request_data);
 
         session()->flash('success', 'Successfully Updated !');
+        if (Auth::user()->hasRole('doctor')) {
+            return redirect()->back();
+        }
         return redirect()->route('dashboard.users.index');
     }
 

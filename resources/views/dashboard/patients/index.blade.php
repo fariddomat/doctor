@@ -16,8 +16,10 @@
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
                         Search</button>
-                    <a href="{{ route('dashboard.users.create') }}" class="btn btn-outline-primary"><i class="fa fa-plus"
-                            aria-hidden="true"></i> Create</a>
+                    @if (Auth::user()->hasRole('admin'))
+                        <a href="{{ route('dashboard.users.create') }}" class="btn btn-outline-primary"><i
+                                class="fa fa-plus" aria-hidden="true"></i> Create</a>
+                    @endif
 
                 </div>
             </div>
@@ -40,6 +42,11 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Appointments</th>
+                                <th class="none">Age</th>
+                                <th class="none">Address</th>
+                                <th class="none">Details</th>
+
+                                <th class="none">Rank</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,47 +61,50 @@
                                             {{ $user->patient->appointments->count() }}
                                         @endif
                                     </td>
+                                    <td>{{ $user->patient->age }}</td>
+                                    <td>{{ $user->patient->address }}</td>
+                                    <td>{{ $user->patient->details }}</td>
+                                    <td>
+                                        <form action="{{ route('dashboard.patients.rank', $user->patient->id) }}" method="post">
+                                            @csrf
+                                            <br>score : <br><input name="rank" class="form-control" type="number" min="1" max="5" value="{{ old('rank',$user->patient->rank) }}"><br>
+                                            rank Details <textarea name="rank_details" class="form-control" id="" cols="" rows="">{{ old('rank',$user->patient->rank_details) }}</textarea>
+                                            <br>
+                                        @if (Auth::user()->hasRole('secr'))
+                                            <button type="submit" class="btn btn-sm btn-primary">Rank</button>
+                                        @endif</form>
+
+                                    </td>
                                     <td>
 
                                         <a href="{{ route('dashboard.patients.show', $user->patient->id) }}"
                                             class="btn btn-outline-success" style="display: inline-block"><i
                                                 class="fa fa-book"></i> Show</a>
 
-                                        <a href="{{ route('dashboard.users.edit', $user->id) }}"
-                                            class="btn btn-outline-warning" style="display: inline-block"><i
-                                                class="fa fa-edit"></i> Edit</a>
 
-
-                                        <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST"
-                                            style="display: inline-block">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-outline-danger delete"
-                                                style="display: inline-block"><i class="fa fa-trash" aria-hidden="true"></i>
-                                                Delete</button>
-                                        </form>
-
-                                        @if ($user->status == 'active')
-                                            <form action="{{ route('dashboard.users.ban', $user->id) }}" method="POST"
-                                                style="display: inline-block">
-                                                @csrf
-                                                @method('post')
-                                                <button type="submit" class="btn btn-outline-info ban"
-                                                    style="display: inline-block"><i class="fa fa-ban"
-                                                        aria-hidden="true"></i> Ban</button>
-                                            </form>
-                                        @else
-                                            <form action="{{ route('dashboard.users.unban', $user->id) }}" method="POST"
-                                                style="display: inline-block">
-                                                @csrf
-                                                @method('post')
-                                                <button type="submit" class="btn btn-outline-success unBan"
-                                                    style="display: inline-block"><i class="fa fa-ban"
-                                                        aria-hidden="true"></i> UnBan</button>
-                                            </form>
+                                        @if (Auth::user()->hasRole(['admin', 'secr']))
+                                            @if ($user->status == 'active')
+                                                <form action="{{ route('dashboard.users.ban', $user->id) }}" method="POST"
+                                                    style="display: inline-block">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button type="submit" class="btn btn-outline-info ban"
+                                                        style="display: inline-block"><i class="fa fa-ban"
+                                                            aria-hidden="true"></i> Ban</button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('dashboard.users.unban', $user->id) }}"
+                                                    method="POST" style="display: inline-block">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button type="submit" class="btn btn-outline-success unBan"
+                                                        style="display: inline-block"><i class="fa fa-ban"
+                                                            aria-hidden="true"></i> UnBan</button>
+                                                </form>
+                                            @endif
                                         @endif
 
-                                        
+
                                     </td>
                                 </tr>
                             @endforeach
