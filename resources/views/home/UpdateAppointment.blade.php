@@ -76,7 +76,7 @@
                         <h2>Make an Appointment</h2>
                     </div>
 
-                    <form action="{{ route('postAppointment') }}" method="post" role="form" class="php-email-form">
+                    <form action="{{ route('appointmentUpdate', $appointment->id) }}" method="post" role="form" class="php-email-form">
                         @csrf
                         @method('POST')
                         <div class="row">
@@ -85,12 +85,13 @@
                                     <p class="mb-0 text-danger">{{ $error }}</p>
                                 @endforeach
                             @endif
+                            <input type="hidden" name="id" value="{{ $appointment->id }}">
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                             <div class="col-md-3 form-group mt-3">
-                                <select name="doctor_id" id="doctor_id" class="form-select">
+                                <select name="doctor_id" id="doctor_id" class="form-select " disabled>
                                     <option value="">Select Doctor</option>
                                     @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" @if (old('doctor_id') == $doctor->id)
+                                        <option value="{{ $doctor->id }}" @if ($appointment->doctor_appointment->doctor->user_id == $doctor->id)
                                             selected
                                         @endif>{{ $doctor->name }}</option>
                                     @endforeach
@@ -100,10 +101,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3 form-group mt-3">
-                                <select name="type_id" id="type_id" class="form-select">
+                                <select name="type_id" id="type_id" class="form-select" disabled>
                                     <option value="">Select Type</option>
                                     @foreach ($types as $type)
-                                        <option value="{{ $type->id }}"  @if (old('type_id') == $type->id)
+                                        <option value="{{ $type->id }}"  @if ($appointment->type_id == $type->id)
                                             selected
                                         @endif>{{ $type->name }}</option>
                                     @endforeach
@@ -114,7 +115,7 @@
                             </div>
 
                             <div class="col-md-3 form-group mt-3">
-                                <input type="date" id="appointment_date" name="appointment_date" class="form-control datepicker" id="date"
+                                <input type="date" id="appointment_date" value="{{ $appointment->appointment_date }}"  name="appointment_date" class="form-control datepicker" id="date"
                                     placeholder="Appointment Date" data-rule="minlen:4"
                                     data-msg="Please enter at least 4 chars" min="{{ now()->toDateString('Y-m-d') }}">
                                 <div class="validate"></div>
@@ -122,13 +123,13 @@
 
                             <div class="col-md-3 form-group mt-3">
                                 <select name="appointment_time"  id="appointment_time"   class="form-control">
-                                    <option value="">Please select date</option>
+                                    <option value="{{ $appointment->doctor_appointment->daily_appointment_id }}">{{ $appointment->appointment_time }}</option>
                                 </select>
                                 <div class="validate"></div>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <textarea class="form-control" name="user_message" rows="5" placeholder="Message (Optional)">{{ old('user_message') }}</textarea>
+                            <textarea class="form-control" name="user_message" rows="5"  disabled placeholder="Message (Optional)">{{$appointment->user_message }}</textarea>
                             <div class="validate"></div>
                         </div>
                         <div class="mb-3">
@@ -136,7 +137,7 @@
                             <div class="error-message"></div>
                             <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div class="text-center"><button type="submit">Make an Appointment</button></div>
+                        <div class="text-center"><button type="submit">Update Appointment</button></div>
                     </form>
 
                 </div>

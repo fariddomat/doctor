@@ -197,7 +197,7 @@ class AppointmentController extends Controller
             }
             Status::create([
                 'appointment_id' => $appointment->id,
-                'status' => 'Deffer Appointment - by : ' . auth()->user()->name
+                'status' => 'Apologies for defering Appointment - by : ' . auth()->user()->name
             ]);
         }
 

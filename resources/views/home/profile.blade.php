@@ -26,7 +26,11 @@
                                 Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-2"><i class="fa fa-calendar"></i>
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-2"><i class="fa fa-edit"></i>
+                                Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-3"><i class="fa fa-calendar"></i>
                                 Appointments</a>
                         </li>
 
@@ -112,7 +116,59 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane" id="tab-2">
+                            <div class="row gy-4">
+                                <div class="col-lg-12 details">
+                                    <h3>Edit Information</h3>
+                                    <form action="{{ route('updatePatient') }}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        @if ($errors->any())
+                                            @foreach ($errors->all() as $error)
+                                                <p class="mb-0 text-danger">{{ $error }}</p>
+                                            @endforeach
+                                        @endif
+                                        <input type="hidden" name="id" value="{{ $user->patient->id }}">
+                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        <div class="row mb-3">
+                                            <label for="" class="col-lg-2">Age</label>
+                                            <div class="col-lg-8">
+                                                <input type="number" min="1" max="100"
+                                                    value="{{ $user->patient->age }}" class="form-control "
+                                                    name="age" id="">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3">
+                                            <label for="" class="col-lg-2">Address</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="address" id="" cols="" rows="" class="form-control">{{ $user->patient->address }}</textarea>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3">
+                                            <label for="" class="col-lg-2">Details</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="details" id="" cols="" rows="" class="form-control">{{ $user->patient->details }}</textarea>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-2 offset-md-5">
+
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab-3">
                             <div class="row gy-4">
                                 <div class="col-lg-12 details">
                                     <div class="card">
@@ -120,7 +176,7 @@
                                             <i class="fa fa-align-justify"></i> Appointment
                                         </div>
                                         <div class="card-block table-responsive">
-                                            @if ($user->patient->appointments->count() > 0)
+                                            @if ($appointments->count() > 0)
                                                 <table id="dataTable"
                                                     class="table table-striped display responsive nowrap">
                                                     <thead>
@@ -135,13 +191,16 @@
                                                             <th class="none">Doctor Report</th>
                                                             <th class="none">Fee</th>
                                                             <th class="none">Un Paid Fee</th>
+                                                            <th class="none">Action</th>
+                                                            <th class="none">Status Log</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($user->patient->appointments as $index => $appointment)
+                                                        @foreach ($appointments as $index => $appointment)
                                                             <tr>
                                                                 <td>{{ $index + 1 }}</td>
-                                                                <td>{{ $appointment->doctor_appointment->doctor->user->name }}</td>
+                                                                <td>{{ $appointment->doctor_appointment->doctor->user->name }}
+                                                                </td>
                                                                 <td>{{ $appointment->appointment_date }}</td>
                                                                 <td>{{ $appointment->appointment_time }}</td>
                                                                 <td>{{ $appointment->status }}</td>
@@ -159,6 +218,50 @@
                                                                     <td></td>
                                                                     <td></td>
                                                                 @endif
+                                                                <td>
+                                                                    @if ($appointment->status != 'done' && $appointment->status != 'reject'  && $appointment->status != 'cancel')
+                                                                        <a href="{{ route('updateAppointment', $appointment->id) }}"
+                                                                            class="btn btn-sm btn-outline-warning"
+                                                                            style="display: inline-block"><i
+                                                                                class="fa fa-edit"></i> Edit</a>
+
+
+                                                                        <form
+                                                                            action="{{ route('cancelAppointment', $appointment->id) }}"
+                                                                            method="POST" style="display: inline-block">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button type="submit"
+                                                                                class="btn btn-sm btn-outline-danger delete"
+                                                                                style="display: inline-block"><i
+                                                                                    class="fa fa-trash"
+                                                                                    aria-hidden="true"></i>
+                                                                                Cancel</button>
+                                                                        </form>
+                                                                    @endif
+
+
+
+                                                                </td>
+                                                                <td>
+                                                                    <table class="table table-striped " class="mt-3">
+                                                                        @foreach ($appointment->statuses->reverse() as $status)
+                                                                            <tr>
+
+                                                                                <td>
+
+                                                                                    <h5 class="mt-1">
+                                                                                        {{ $status->status }} </h5>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span class="text-primary bold">
+                                                                                        {{ $status->created_at->diffForHumans() }}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </table>
+
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>

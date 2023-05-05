@@ -36,10 +36,13 @@ Auth::routes();
 Route::middleware(['auth'])
     ->group(function () {
         Route::get('appointment', 'Home\PatientController@appointment')->name('appointment');
+        Route::get('updateAppointment/{id}', 'Home\PatientController@updateAppointment')->name('updateAppointment');
+        Route::post('appointmentUpdate/{id}', 'Home\PatientController@appointmentUpdate')->name('appointmentUpdate');
+        Route::delete('cancelAppointment/{id}', 'Home\PatientController@cancelAppointment')->name('cancelAppointment');
 
-    Route::post('/appointment/time', 'Home\PatientController@appointmentTime')->name('appointment.time');
+        Route::post('/appointment/time', 'Home\PatientController@appointmentTime')->name('appointment.time');
         Route::post('postAppointment', 'Home\PatientController@postAppointment')->name('postAppointment');
         Route::get('profile', 'Home\PatientController@profile')->name('profile');
         Route::post('updateProfile', 'Home\PatientController@updateProfile')->name('updateProfile');
-
+        Route::post('updatePatient', 'Home\PatientController@updatePatient')->name('updatePatient');
     });
