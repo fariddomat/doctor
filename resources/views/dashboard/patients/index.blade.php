@@ -57,22 +57,34 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        @if ($user->patient)
-                                            {{ $user->patient->appointments->count() }}
+                                        @if (Auth::user()->hasRole('doctor'))
+                                            @if ($user->patient)
+                                                {{ $user->patient->appointments()->withTrashed()->whenUser(Auth::id())->count() }}
+                                            @endif
+                                        @else
+                                            @if ($user->patient)
+                                                {{ $user->patient->appointments->count() }}
+                                            @endif
                                         @endif
+
                                     </td>
                                     <td>{{ $user->patient->age }}</td>
                                     <td>{{ $user->patient->address }}</td>
                                     <td>{{ $user->patient->details }}</td>
                                     <td>
-                                        <form action="{{ route('dashboard.patients.rank', $user->patient->id) }}" method="post">
+                                        <form action="{{ route('dashboard.patients.rank', $user->patient->id) }}"
+                                            method="post">
                                             @csrf
-                                            <br>score : <br><input name="rank" class="form-control" type="number" min="1" max="5" value="{{ old('rank',$user->patient->rank) }}"><br>
-                                            rank Details <textarea name="rank_details" class="form-control" id="" cols="" rows="">{{ old('rank',$user->patient->rank_details) }}</textarea>
+                                            <br>score : <br><input name="rank" class="form-control" type="number"
+                                                min="1" max="5"
+                                                value="{{ old('rank', $user->patient->rank) }}"><br>
+                                            rank Details
+                                            <textarea name="rank_details" class="form-control" id="" cols="" rows="">{{ old('rank', $user->patient->rank_details) }}</textarea>
                                             <br>
-                                        @if (Auth::user()->hasRole('secr'))
-                                            <button type="submit" class="btn btn-sm btn-primary">Rank</button>
-                                        @endif</form>
+                                            @if (Auth::user()->hasRole('secr'))
+                                                <button type="submit" class="btn btn-sm btn-primary">Rank</button>
+                                            @endif
+                                        </form>
 
                                     </td>
                                     <td>

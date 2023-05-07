@@ -14,12 +14,7 @@
     <div class="col-lg-12">
         <form action="">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" id="search" autofocus
-                            value="{{ request()->search }}" aria-describedby="helpId" placeholder="search">
-                    </div>
-                </div>
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <select name="status" class="form-control" id="">
@@ -34,7 +29,7 @@
 
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
-                        Search</button>
+                        Filter</button>
                     <a href="{{ route('dashboard.appointments.create') }}" class="btn btn-outline-primary"><i
                             class="fa fa-plus" aria-hidden="true"></i> Create</a>
 
@@ -62,7 +57,7 @@
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th class="none">Patient Message</th>
+                                <th class="none">Message</th>
                                 <th class="none">Report</th>
                                 <th class="none">Fee</th>
                                 <th class="none">Action</th>
@@ -111,6 +106,8 @@
                                             class="btn btn-sm btn-outline-primary" style="display: inline-block"><i
                                                 class="fa fa-book"></i> Report</a>
 
+                                        @if ($appointment->status != 'cancel' && $appointment->status != 'reject' && $appointment->status != 'done')
+
                                         <a href="{{ route('dashboard.appointments.edit', $appointment->id) }}"
                                             class="btn btn-sm btn-outline-warning" style="display: inline-block"><i
                                                 class="fa fa-edit"></i> Edit</a>
@@ -124,6 +121,7 @@
                                                 style="display: inline-block"><i class="fa fa-trash" aria-hidden="true"></i>
                                                 Cancel</button>
                                         </form>
+                                        @endif
 
                                         @if ($appointment->treatment)
                                             @if (!$appointment->treatment->Paid)

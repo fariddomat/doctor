@@ -56,7 +56,7 @@
 
         <!-- ======= About Section ======= -->
         <section id="about" class="about">
-            <div class="container-fluid">
+            <div class="container container-fluid">
 
                 <div class="row">
                     <div
@@ -276,7 +276,7 @@
                             <div class="gallery-item">
                                 <a href="{{ asset('home/images/gallery/image_' . $i . '.jpg') }}" class="galelry-lightbox">
                                     <img src="{{ asset('home/images/gallery/image_' . $i . '.jpg') }}" alt=""
-                                        class="img-fluid">
+                                        class="img-fluid" style="height: 40vh; width:100%">
                                 </a>
                             </div>
                         </div>

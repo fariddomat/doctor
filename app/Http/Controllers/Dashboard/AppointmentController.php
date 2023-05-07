@@ -32,8 +32,11 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         if (auth()->user()->hasRole('doctor')) {
+            if ($request->id) {
 
-            $appointments = Appointment::whenStatus($request->status)->whenUser(auth()->id())->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
+                $appointments = Appointment::whenStatus($request->status)->whenUser(auth()->id())->where('patient_id', $request->id)->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
+            }else
+                $appointments = Appointment::whenStatus($request->status)->whenUser(auth()->id())->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);
         } elseif ($request->id) {
 
             $appointments = Appointment::whenStatus($request->status)->where('patient_id', $request->id)->with(['patient', 'type'])->latest()->withTrashed()->paginate(5);

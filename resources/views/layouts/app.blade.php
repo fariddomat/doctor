@@ -15,7 +15,7 @@
      <link href="{{ asset('dashboard/css/style.css') }}" rel="stylesheet">
  </head>
 
- <body class="">
+ <body class="" style="background-image: url('/bg.jpg');">
      <div class="container" style="padding-top: 150px">
          @yield('content')
      </div>

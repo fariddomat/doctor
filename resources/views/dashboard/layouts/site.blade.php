@@ -102,7 +102,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.patients.index') }}"><i class="icon-user"></i> Patients</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.paymentlog.index') }}"><i class="fa fa-money"></i> Payments</a>
+                </li>
                 @if (Auth::user()->hasRole('admin'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.log') }}"><i class="fa fa-history"></i> Log</a>

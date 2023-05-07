@@ -23,8 +23,8 @@
                         <div class="col-md-3">
                             <label>Image {{ $i }}</label>
                             <input type="file" name="image[]" class="form-control-file image{{ $i }}">
-                            <img src="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" style=" margin-top: 10px; max-width: 250px;"class="img-thumbnail image{{ $i }}-preview "
-                                alt="">
+                            <img src="{{ asset('home/images/gallery/image_'.$i.'.jpg') }}" style=" margin-top: 10px; max-width: 250px;height: 20vh;"class="img-thumbnail image{{ $i }}-preview "
+                                alt="" >
                         </div>
                         @endfor
 

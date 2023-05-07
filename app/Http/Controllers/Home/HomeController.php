@@ -12,10 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $patients=User::whereRole('user')->count();
+        $patients=User::role('user')->count();
         $appointments=Appointment::count();
         $types=Type::count();
-        $doctors=User::whereRole('doctor')->get();
+        $doctors=User::role('doctor')->get();
         return view('home.index', compact('patients', 'appointments', 'types', 'doctors'));
     }
 }

@@ -99,7 +99,7 @@
                         <div class="form-group ">
                             <label for="name">Fee
                             </label>
-                            <input type="number" name="fee" value="{{ old('fee') }}" id=""
+                            <input type="number" min="{{ $appointment->type->price }}" name="fee" value="{{ old('fee', $appointment->type->price) }}" id=""
                                 class="form-control">
                         </div>
                     @endif

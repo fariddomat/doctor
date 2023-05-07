@@ -13,7 +13,7 @@
                 <div class="input-group m-b-1">
                     <span class="input-group-addon"><i class="icon-user"></i>
                     </span>
-                    <input type="text" name="name" class="form-control" placeholder="Username">
+                    <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Username">
 
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="input-group m-b-1">
                     <span class="input-group-addon">@</span>
-                    <input type="email" name="email" class="form-control en" placeholder="Email">
+                    <input type="email" value="{{old('email')}}"  name="email" class="form-control en" placeholder="Email">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">

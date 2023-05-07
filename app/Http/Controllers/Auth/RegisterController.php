@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->attachRole('user');
+        $user->assignRole('user');
         Patient::create([
             'user_id' => $user->id
         ]);
