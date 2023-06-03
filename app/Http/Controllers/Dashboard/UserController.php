@@ -155,7 +155,7 @@ class UserController extends Controller
             if ($oldRole == 2) {
                 $doctor = Doctor::findOrFail($user->doctor->id);
                 $doctor->delete();
-            } elseif ($oldRole == 4) {
+            } elseif ($oldRole == 3) {
                 $patient = Patient::findOrFail($user->patient->id);
                 $patient->delete();
             }

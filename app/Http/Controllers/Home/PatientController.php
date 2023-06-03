@@ -33,7 +33,7 @@ class PatientController extends Controller
         $types = Type::all();
         $doctors = User::whereRole('doctor')->get();
         // dd(json_encode(array_merge($dayOfWorks->pluck('dates')->toArray())));
-        return view('home.appointment', compact('types', 'doctors'));
+        return view('home.appointment', compact('types', 'doctors')); 
     }
 
     public function appointmentTime(Request $request)

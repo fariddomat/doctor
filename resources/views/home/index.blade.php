@@ -155,7 +155,7 @@
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch  mt-4 mb-2">
                             <div class="icon-box">
                                 <div class="icon"><i class="fas fa-{{ setting('service_icon_' . $i) }}"></i></div>
-                                <h4><a href="">{{ setting('title' . $i) }}</a></h4>
+                                <h4><a href="">{{ setting('service_title_' . $i) }}</a></h4>
                                 <p>{{ setting('service_content_' . $i) }}</p>
                             </div>
                         </div>

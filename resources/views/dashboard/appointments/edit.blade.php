@@ -89,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label for="date">Appointment Date</label>
-                        <input type="date" class="form-control" name="appointment_date" id="appointment_date"  value="{{ old('appointment_date', $appointment->appointment_date) }}" placeholder="">
+                        <input type="date" class="form-control" name="appointment_date" id="appointment_date"  value="{{ old('appointment_date', $appointment->appointment_date) }}" placeholder=""  min="{{ now()->toDateString('Y-m-d') }}">
                     </div>
                     <select name="appointment_time"  id="appointment_time"   class="form-control">
                         <option value="{{ $appointment->doctor_appointment->daily_appointment_id }}">{{ $appointment->appointment_time }}</option>

@@ -6,10 +6,25 @@ migrations [Database folder => migrations]
 
 view
 resources => views
+site.blade.php template
 
 controller
 App => Http => controllers
 
+    [Resource]
+    index       show items
+    show        show one item
+    create      open create page
+    store       store new value
+    edit        open edit page
+    update      update edited value
+    destroy     delete item
+
+    4 view (not all required)
+    index       show all items
+    create      show create page
+    edit        show edit page
+    show        show one item details
 
 routing system
 routes folder

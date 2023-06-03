@@ -44,6 +44,7 @@ class TypeController extends Controller
             'name'=>'required|unique:types,name',
             'description' => 'required'
         ]);
+
         $type=Type::create($request->all());
 
         SettingLog::log('success', auth()->id(), 'Add New Type', route('dashboard.types.edit', $type->id));
@@ -87,6 +88,7 @@ class TypeController extends Controller
             'name'=>'required|unique:types,name,'.$id,
             'description' => 'required'
         ]);
+
         $type=Type::findOrFail($id);
         $type->update($request->all());
         SettingLog::log('warning', auth()->id(), 'Update Type', route('dashboard.types.edit', $type->id));
@@ -104,6 +106,7 @@ class TypeController extends Controller
     public function destroy($id)
     {
         $type=Type::findOrFail($id);
+        
         $type->delete();
         SettingLog::log('danger', auth()->id(), 'Delete Type : '.$type->name, null);
 

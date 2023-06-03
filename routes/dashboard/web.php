@@ -18,6 +18,8 @@ Route::prefix('dashboard')
         Route::post('updateProfile', 'HomeController@updateProfile')->name('updateProfile');
 
         Route::resource('types', 'TypeController');
+
+        
         Route::resource('dayOfWorks', 'DayOfWorkController');
         Route::resource('dailyAppointments', 'DailyAppointmentController');
         Route::get('/appointments/status', 'AppointmentController@status')->name('appointments.status');

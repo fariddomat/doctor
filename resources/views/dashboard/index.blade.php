@@ -85,7 +85,7 @@
                                 </button>
                             </div>
                             <h4 class="m-b-0 m-l-2">
-                                
+
                                 {{ $appointments }}
                                 </h4>
                             <p>Apppointments</p>

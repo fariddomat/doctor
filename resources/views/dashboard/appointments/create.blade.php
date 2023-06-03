@@ -83,7 +83,7 @@
                         <label for="name">Date</label>
                         <input type="date" id="appointment_date" name="appointment_date" class="form-control datepicker" id="date"
                             placeholder="Appointment Date" data-rule="minlen:4"
-                            data-msg="Please enter at least 4 chars">
+                            data-msg="Please enter at least 4 chars"  min="{{ now()->toDateString('Y-m-d') }}">
                         <div class="validate"></div>
                     </div>
 

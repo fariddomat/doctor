@@ -17,5 +17,5 @@ class HomeController extends Controller
         $types=Type::count();
         $doctors=User::role('doctor')->get();
         return view('home.index', compact('patients', 'appointments', 'types', 'doctors'));
-    }
+    } 
 }

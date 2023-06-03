@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Home\HomeController@index')->name('home');
+
+
 Route::get('/clear', function () {
 
     Artisan::call('cache:clear');

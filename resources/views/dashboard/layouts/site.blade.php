@@ -180,7 +180,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item"><a
-                    href="{{ route('dashboard.home') }}">{{ Auth::user()->roles->first()->display_name }}</a>
+                    href="{{ route('dashboard.home') }}">{{ Auth::user()->roles->first()->name}}</a>
             </li>
             <li class="breadcrumb-item active">Dashboard</li>
             <!-- Breadcrumb Menu-->
