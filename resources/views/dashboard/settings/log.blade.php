@@ -38,7 +38,7 @@
                                                     @if ($log->url)
 
                                                     <a href="{{ $log->url }}"
-                                                        class="btn btn-outline-warning" style="display: inline-block"><i
+                                                        class="btn btn-warning" style="display: inline-block"><i
                                                             class="fa fa-edit"></i> Show</a>
 
                                                     @endif

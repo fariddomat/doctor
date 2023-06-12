@@ -26,7 +26,7 @@
                         that.closest("form").submit();
                     }),
 
-                    Noty.button("No", "btn btn-primary me-2", function() {
+                    Noty.button("No", "btn btn-info me-2", function() {
                         n.close();
                     })
                 ]
@@ -48,7 +48,7 @@
                         that.closest("form").submit();
                     }),
 
-                    Noty.button("No", "btn btn-primary me-2", function() {
+                    Noty.button("No", "btn btn-info me-2", function() {
                         n.close();
                     })
                 ]
@@ -69,7 +69,7 @@
                         that.closest("form").submit();
                     }),
 
-                    Noty.button("No", "btn btn-primary me-2", function() {
+                    Noty.button("No", "btn btn-info me-2", function() {
                         n.close();
                     })
                 ]

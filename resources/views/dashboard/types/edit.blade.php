@@ -31,7 +31,7 @@
                         <input type="number" class="form-control" name="price" id="price"  value="{{ old('price', $type->price) }}" placeholder="">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
                             Update</button>
                     </div>
                 </form>

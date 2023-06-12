@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
                             Create</button>
                     </div>
                 </form>
@@ -58,7 +58,7 @@
                                             method="POST" style="display: inline-block">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-outline-danger delete"
+                                            <button type="submit" class="btn btn-danger delete"
                                                 style="display: inline-block"><i class="fa fa-trash"
                                                     aria-hidden="true"></i> Delete</button>
                                         </form>

@@ -6,149 +6,153 @@
     <div class="col-lg-12">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-primary">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active p-a-0"  aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-user-md"></i>
-                                </button>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-user-md"></i>
                             </div>
-                            <h4 class="m-b-0 m-l-2">
-                            {{ $doctors }}
-
-                            </h4>
-                            <p>Doctors</p>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Doctors</p>
+                                <h4 class="mb-0">{{ $doctors }}</h4>
+                            </div>
                         </div>
-                        <div class="chart-wrapper p-x-1" style="height:70px;">
-                            <canvas id="card-chart1" class="chart" height="70"></canvas>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
                         </div>
                     </div>
                 </div>
-                <!--/col-->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-info">
-                        <div class="card-block p-b-0">
-                            <button type="button" class="btn btn-transparent active p-a-0 pull-left">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="fa fa-users"></i>
-                            </button>
-                            <h4 class="m-b-0 m-l-2"> {{ $patients }}</h4>
-                            <p>Patients</p>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Patient</p>
+                                <h4 class="mb-0">{{ $patients }}</h4>
+                            </div>
                         </div>
-                        <div class="chart-wrapper p-x-1" style="height:70px;">
-                            <canvas id="card-chart2" class="chart" height="70"></canvas>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
                         </div>
                     </div>
                 </div>
-                <!--/col-->
 
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-secondary" style="  background-color: #1e7297;">
-                        <div class="card-block p-b-0">
-                            <button type="button" class="btn btn-transparent active p-a-0 pull-left">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="fa fa-user"></i>
-                            </button>
-                            <h4 class="m-b-0 m-l-2"> {{ $secretaries }}</h4>
-                            <p>Secretaries</p>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Secretaries</p>
+                                <h4 class="mb-0">{{ $secretaries }}</h4>
+                            </div>
                         </div>
-                        <div class="chart-wrapper p-x-1" style="height:70px;">
-                            <canvas id="card-chart2" class="chart" height="70"></canvas>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-medkit"></i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Types</p>
+                                <h4 class="mb-0">{{ $types }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-secondary">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active  p-a-0"  aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-medkit"></i>
-                                </button>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-plus-square"></i>
                             </div>
-                            <h4 class="m-b-0 m-l-2"> {{ $types }}</h4>
-                            <p>Types</p>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Appointments</p>
+                                <h4 class="mb-0">{{ $appointments }}</h4>
+                            </div>
                         </div>
-                        <div class="chart-wrapper p-x-1" style="height:70px;">
-                            <canvas id="card-chart4" class="chart" height="70"></canvas>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
                         </div>
                     </div>
                 </div>
-                <!--/col-->
-                <!--/col-->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-warning">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active  p-a-0" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-plus-square "></i>
-                                </button>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-plus-square"></i>
                             </div>
-                            <h4 class="m-b-0 m-l-2">
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Pending Appointments</p>
+                                <h4 class="mb-0">{{ $pending_appointments }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Payments</p>
+                                <h4 class="mb-0">{{ $payments }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 my-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="fa fa-history"></i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">logs</p>
+                                <h4 class="mb-0">{{ $logs }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3" style="min-height: 75px">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span> </p>
+                        </div>
+                    </div>
+                </div>
 
-                                {{ $appointments }}
-                                </h4>
-                            <p>Apppointments</p>
-                        </div>
-                        <div class="chart-wrapper" style="height:70px;">
-                            <canvas id="card-chart3" class="chart" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!--/col-->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-warning" style="background-color: #ff7800">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active  p-a-0" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-plus-square "></i>
-                                </button>
-                            </div>
-                            <h4 class="m-b-0 m-l-2"> {{ $pending_appointments }}</h4>
-                            <p>Pending Apppointments</p>
-                        </div>
-                        <div class="chart-wrapper" style="height:70px;">
-                            <canvas id="card-chart3" class="chart" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!--/col-->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-success" style="">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active  p-a-0" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-money "></i>
-                                </button>
-                            </div>
-                            <h4 class="m-b-0 m-l-2"> {{ $payments }}</h4>
-                            <p>Payments</p>
-                        </div>
-                        <div class="chart-wrapper" style="height:70px;">
-                            <canvas id="card-chart3" class="chart" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!--/col-->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card card-inverse card-danger" style="">
-                        <div class="card-block p-b-0">
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-transparent active  p-a-0" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-history "></i>
-                                </button>
-                            </div>
-                            <h4 class="m-b-0 m-l-2"> {{ $logs }}</h4>
-                            <p>Logs</p>
-                        </div>
-                        <div class="chart-wrapper" style="height:70px;">
-                            <canvas id="card-chart3" class="chart" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!--/col-->
             </div>
             <!--/row-->
 

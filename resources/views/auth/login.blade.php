@@ -34,14 +34,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-primary p-x-2">
+                                    <button type="submit" class="btn btn-info p-x-2">
                                         <i class="icon-login"></i>
                                         Login</button>
                                 </div>
 
                             </div><div class="row">
                                 <div class="col-xs-6"> do not have account?
-                                    <a href="{{ route('register') }}" class="btn btn-primary p-x-2">
+                                    <a href="{{ route('register') }}" class="btn btn-info p-x-2">
                                         <i class="icon-login"></i>
                                         Register</a>
                                 </div>
@@ -54,7 +54,7 @@
                         <div>
                             <h2>Doctor</h2>
                             <p>Login to dashboard</p>
-                            <a href="{{ route('home') }}" class="btn btn-primary active m-t-1"> Back to Home</a>
+                            <a href="{{ route('home') }}" class="btn btn-info active m-t-1"> Back to Home</a>
                         </div>
                     </div>
                 </div>

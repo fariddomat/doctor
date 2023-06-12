@@ -31,7 +31,7 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Update <i class="fa fa-save" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info">Update <i class="fa fa-save" aria-hidden="true"></i>
                             </button>
                     </div>
                 </form>

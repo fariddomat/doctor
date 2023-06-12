@@ -41,7 +41,7 @@
                             autocomplete="new-password">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
                             Update</button>
                     </div>
                 </form>
@@ -49,5 +49,5 @@
         </div>
     </div>
 
-   
+
 @endsection

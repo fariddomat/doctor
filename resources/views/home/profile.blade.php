@@ -109,7 +109,7 @@
                                         <div class="row mb-3">
                                             <div class="col-md-2 offset-md-5">
 
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-info">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -169,7 +169,7 @@
                                         <div class="row mb-3">
                                             <div class="col-md-2 offset-md-5">
 
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-info">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -230,7 +230,7 @@
                                                                 <td>
                                                                     @if ($appointment->status != 'done' && $appointment->status != 'reject'  && $appointment->status != 'cancel')
                                                                         <a href="{{ route('updateAppointment', $appointment->id) }}"
-                                                                            class="btn btn-sm btn-outline-warning"
+                                                                            class="btn btn-sm btn-warning"
                                                                             style="display: inline-block"><i
                                                                                 class="fa fa-edit"></i> Edit</a>
 
@@ -241,7 +241,7 @@
                                                                             @csrf
                                                                             @method('delete')
                                                                             <button type="submit"
-                                                                                class="btn btn-sm btn-outline-danger delete"
+                                                                                class="btn btn-sm btn-danger delete"
                                                                                 style="display: inline-block"><i
                                                                                     class="fa fa-trash"
                                                                                     aria-hidden="true"></i>

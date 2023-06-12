@@ -14,10 +14,10 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i>
                         Search</button>
                     @if (Auth::user()->hasRole('admin'))
-                        <a href="{{ route('dashboard.users.create') }}" class="btn btn-outline-primary"><i
+                        <a href="{{ route('dashboard.users.create') }}" class="btn btn-info"><i
                                 class="fa fa-plus" aria-hidden="true"></i> Create</a>
                     @endif
 
@@ -28,9 +28,11 @@
 
 
     <div class="col-lg-12" style="margin-top: 15px">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> Users
+        <div class="card  my-4">
+            <div class="card-header  p-0 position-relative mt-n4 mx-3 z-index-2 mt-2">
+                <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Patients</h6>
+                </div>
             </div>
             <div class="card-block table-responsive">
 
@@ -38,10 +40,10 @@
                     <table id="dataTable" class="table table-striped display responsive nowrap">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Appointments</th>
+                                <th class="">#</th>
+                                <th class="all">Name</th>
+                                <th class="none">Email</th>
+                                <th class="all">Appointments</th>
                                 <th class="none">Age</th>
                                 <th class="none">Address</th>
                                 <th class="none">Details</th>
@@ -82,7 +84,7 @@
                                             <textarea name="rank_details" class="form-control" id="" cols="" rows="">{{ old('rank', $user->patient->rank_details) }}</textarea>
                                             <br>
                                             @if (Auth::user()->hasRole('secr'))
-                                                <button type="submit" class="btn btn-sm btn-primary">Rank</button>
+                                                <button type="submit" class="btn btn-sm btn-info">Rank</button>
                                             @endif
                                         </form>
 
@@ -90,7 +92,7 @@
                                     <td>
 
                                         <a href="{{ route('dashboard.patients.show', $user->patient->id) }}"
-                                            class="btn btn-outline-success" style="display: inline-block"><i
+                                            class="btn btn-success" style="display: inline-block"><i
                                                 class="fa fa-book"></i> Show</a>
 
 
@@ -100,7 +102,7 @@
                                                     style="display: inline-block">
                                                     @csrf
                                                     @method('post')
-                                                    <button type="submit" class="btn btn-outline-info ban"
+                                                    <button type="submit" class="btn btn-info ban"
                                                         style="display: inline-block"><i class="fa fa-ban"
                                                             aria-hidden="true"></i> Ban</button>
                                                 </form>
@@ -109,7 +111,7 @@
                                                     method="POST" style="display: inline-block">
                                                     @csrf
                                                     @method('post')
-                                                    <button type="submit" class="btn btn-outline-success unBan"
+                                                    <button type="submit" class="btn btn-success unBan"
                                                         style="display: inline-block"><i class="fa fa-ban"
                                                             aria-hidden="true"></i> UnBan</button>
                                                 </form>

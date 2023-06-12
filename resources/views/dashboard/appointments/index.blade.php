@@ -28,9 +28,9 @@
                 </div>
 
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i>
                         Filter</button>
-                    <a href="{{ route('dashboard.appointments.create') }}" class="btn btn-outline-primary"><i
+                    <a href="{{ route('dashboard.appointments.create') }}" class="btn btn-info"><i
                             class="fa fa-plus" aria-hidden="true"></i> Create</a>
 
                 </div>
@@ -40,9 +40,11 @@
 
 
     <div class="col-lg-12" style="margin-top: 15px">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> Appointment
+        <div class="card  my-4">
+            <div class="card-header  p-0 position-relative mt-n4 mx-3 z-index-2 mt-2">
+                <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Appointments</h6>
+                </div>
             </div>
             <div class="card-block table-responsive">
 
@@ -51,9 +53,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Doctor</th>
-                                <th>Patient</th>
-                                <th>Type</th>
+                                <th  class="all">Doctor</th>
+                                <th  class="all">Patient</th>
+                                <th  class="all">Type</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Time</th>
@@ -93,23 +95,23 @@
                                     <td>
                                         @if ($appointment->status == 'pending')
                                         <a href="{{ route('dashboard.appointments.status', ['id'=>$appointment->id, 'status'=>'accept']) }}"
-                                            class="btn btn-sm btn-outline-success" style="display: inline-block"><i
+                                            class="btn btn-sm btn-success" style="display: inline-block"><i
                                                 class="fa fa-check"></i> Accept</a>
 
                                                 <a href="{{ route('dashboard.appointments.status', ['id'=>$appointment->id, 'status'=>'reject']) }}"
-                                                    class="btn btn-sm btn-outline-danger" style="display: inline-block"><i
+                                                    class="btn btn-sm btn-danger" style="display: inline-block"><i
                                                         class="fa fa-ban"></i> Reject</a>
 
                                         @endif
 
                                         <a href="{{ route('dashboard.appointments.show', $appointment->id) }}"
-                                            class="btn btn-sm btn-outline-primary" style="display: inline-block"><i
+                                            class="btn btn-sm btn-info" style="display: inline-block"><i
                                                 class="fa fa-book"></i> Report</a>
 
                                         @if ($appointment->status != 'cancel' && $appointment->status != 'reject' && $appointment->status != 'done')
 
                                         <a href="{{ route('dashboard.appointments.edit', $appointment->id) }}"
-                                            class="btn btn-sm btn-outline-warning" style="display: inline-block"><i
+                                            class="btn btn-sm btn-warning" style="display: inline-block"><i
                                                 class="fa fa-edit"></i> Edit</a>
 
 
@@ -117,7 +119,7 @@
                                             method="POST" style="display: inline-block">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger delete"
+                                            <button type="submit" class="btn btn-sm btn-danger delete"
                                                 style="display: inline-block"><i class="fa fa-trash" aria-hidden="true"></i>
                                                 Cancel</button>
                                         </form>
@@ -126,7 +128,7 @@
                                         @if ($appointment->treatment)
                                             @if (!$appointment->treatment->Paid)
                                                 <a href="{{ route('dashboard.paymentlog.create', ['id' => $appointment->id]) }}"
-                                                    class="btn btn-sm btn-outline-primary"> $ Pay</a>
+                                                    class="btn btn-sm btn-info"> $ Pay</a>
                                             @endif
                                         @endif
 

@@ -99,7 +99,7 @@
                         <textarea name="user_message" id="user_message" cols="30" rows="2" class="form-control">{{ old('user_message') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
                             Create</button>
                     </div>
                 </form>

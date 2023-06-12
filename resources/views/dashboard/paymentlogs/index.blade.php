@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i>
                         Search</button>
                 </div>
             </div>
@@ -31,9 +31,11 @@
 
 
     <div class="col-lg-12" style="margin-top: 15px">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> Appointment
+        <div class="card  my-4">
+            <div class="card-header  p-0 position-relative mt-n4 mx-3 z-index-2 mt-2">
+                <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Payment Log</h6>
+                </div>
             </div>
             <div class="card-block table-responsive">
 
@@ -41,9 +43,9 @@
                     <table id="dataTable" class="table table-striped display responsive nowrap">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Doctor</th>
-                                <th>Patient</th>
+                                <th class="all">#</th>
+                                <th class="all">Doctor</th>
+                                <th class="all">Patient</th>
                                 <th>Totalt Fee</th>
                                 <th>Paid Fee</th>
                                 <th>Time</th>

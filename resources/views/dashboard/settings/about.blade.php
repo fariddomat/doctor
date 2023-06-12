@@ -80,7 +80,7 @@
 
 
                     <div class="form-group mr-2">
-                        <button type="submit" class="btn btn-primary">Save <i class="fa fa-plus"
+                        <button type="submit" class="btn btn-info">Save <i class="fa fa-plus"
                                 aria-hidden="true"></i></button>
                     </div>
                 </form>

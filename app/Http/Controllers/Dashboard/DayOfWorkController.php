@@ -73,7 +73,7 @@ class DayOfWorkController extends Controller
     public function edit($id)
     {
         $dayOfWork=DayOfWork::findOrFail($id);
-        return view('dashboard.dayOfWorks.edit', compact('dayOfWork', 'doctors'));
+        return view('dashboard.dayOfWorks.edit', compact('dayOfWork'));
     }
 
     /**

@@ -124,7 +124,7 @@
                         @if (Auth::user()->hasRole('doctor'))
                             @if ($appointment->status == 'accept')
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"
+                                    <button type="submit" class="btn btn-info"><i class="fa fa-plus"
                                             aria-hidden="true"></i>
                                         Save</button>
                                 </div>

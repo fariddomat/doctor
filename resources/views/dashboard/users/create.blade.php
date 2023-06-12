@@ -45,7 +45,7 @@
                         {{-- <a href="{{ route('dashboard.roles.create') }}">Create new Role</a> --}}
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
                             Create</button>
                     </div>
                 </form>
