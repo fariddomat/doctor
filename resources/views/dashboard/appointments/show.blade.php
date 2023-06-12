@@ -3,6 +3,8 @@
     Make Report
 @endsection
 @section('content')
+<div class="row">
+
     <div class="col-lg-6">
         <div class="card ">
             <div class="card-header">
@@ -18,9 +20,9 @@
                     <label for="name" class="col-md-4">Patient Rank: </label>
                     <label for="name" class="col-md-4">{{ $appointment->patient->rank }}
                         @if ($appointment->patient->rank_details)
-
-                         - {{ $appointment->patient->rank_details }}
-                        @endif</label>
+                            - {{ $appointment->patient->rank_details }}
+                        @endif
+                    </label>
                 </div>
                 <div class="form-group row">
                     <label for="name" class="col-md-4">Type : </label>
@@ -62,7 +64,7 @@
     <div class="col-lg-6">
         <div class="card ">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i>Docotr Report
+                <i class="fa fa-align-justify"></i> Docotr Report
             </div>
             <div class="card-block ">
                 <form action="{{ route('dashboard.treatments.store', ['appointment_id' => $appointment->id]) }}"
@@ -77,10 +79,10 @@
                         <label for="name">Report </label>
                         <textarea name="report" id="" cols="30" rows="5" class="form-control">
                             @if ($appointment->treatment)
-{{ old('report', $appointment->treatment->report) }}
-@else
-{{ old('report') }}
-@endif
+                        {{ old('report', $appointment->treatment->report) }}
+                        @else
+                        {{ old('report') }}
+                        @endif
                         </textarea>
                     </div>
                     @if ($appointment->treatment)
@@ -99,8 +101,8 @@
                         <div class="form-group ">
                             <label for="name">Fee
                             </label>
-                            <input type="number" min="{{ $appointment->type->price }}" name="fee" value="{{ old('fee', $appointment->type->price) }}" id=""
-                                class="form-control">
+                            <input type="number" min="{{ $appointment->type->price }}" name="fee"
+                                value="{{ old('fee', $appointment->type->price) }}" id="" class="form-control">
                         </div>
                     @endif
 
@@ -114,10 +116,10 @@
                     <div class="form-group ">
                         <label for="name">Note (optional)</label>
                         <textarea name="note" id="" class="form-control"> @if ($appointment->treatment)
-{{ old('note', $appointment->treatment->note) }}
-@else
-{{ old('note') }}
-@endif
+                        {{ old('note', $appointment->treatment->note) }}
+                        @else
+                        {{ old('note') }}
+                        @endif
                         </textarea>
                     </div>
                     @if (!$appointment->treatment)
@@ -128,7 +130,7 @@
                                             aria-hidden="true"></i>
                                         Save</button>
                                 </div>
-                                @else
+                            @else
                                 Appointment {{ $appointment->status }}
                             @endif
                         @endif
@@ -138,4 +140,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
